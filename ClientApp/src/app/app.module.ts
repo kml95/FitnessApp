@@ -9,17 +9,17 @@ import { ConfigService } from './shared/utils/config.service';
 import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
 import { FormsModule } from '@angular/forms';
-import { UserHomeComponent } from './user-home/user-home.component';
+import { UserPanelModule } from './user-panel/user-panel.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    HomeComponent,
-    UserHomeComponent
+    HomeComponent
   ],
   imports: [
     AccountModule,
+    UserPanelModule,
     BrowserModule,
     HttpClientModule,
     FormsModule,
