@@ -4,12 +4,14 @@ import { HomeComponent } from './home/home.component';
 import { FormsModule } from '@angular/forms';
 import { routing } from './user-panel.routing';
 import { AuthGuard } from '../auth.guard';
+import { CalculatorsModule } from './calculators/calculators.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    routing
+    routing,
+    CalculatorsModule
   ],
   declarations: [HomeComponent],
   providers:    [AuthGuard]

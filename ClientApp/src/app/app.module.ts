@@ -10,6 +10,7 @@ import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
 import { FormsModule } from '@angular/forms';
 import { UserPanelModule } from './user-panel/user-panel.module';
+import { UserService } from './shared/services/user.service';
 
 @NgModule({
   declarations: [
@@ -18,14 +19,14 @@ import { UserPanelModule } from './user-panel/user-panel.module';
     HomeComponent
   ],
   imports: [
-    AccountModule,
     UserPanelModule,
+    AccountModule,
     BrowserModule,
     HttpClientModule,
     FormsModule,
     routing
   ],
-  providers: [ConfigService],
+  providers: [ConfigService, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

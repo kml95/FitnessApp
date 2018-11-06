@@ -37,8 +37,7 @@ namespace FitnessApp
             // Add framework services.
             var connection = @"Server=(localdb)\mssqllocaldb;Database=FitnessApp;Trusted_Connection=True;ConnectRetryCount=0";
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(connection,
-                    b => b.MigrationsAssembly("FitnessApp")));
+                options.UseSqlServer(connection, b => b.MigrationsAssembly("FitnessApp")));
 
             services.AddIdentity<AppUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()

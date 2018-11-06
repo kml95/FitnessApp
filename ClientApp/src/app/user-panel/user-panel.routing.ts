@@ -4,7 +4,16 @@ import { RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 
 import { AuthGuard } from '../auth.guard';
+import { CalculatorsComponent } from './calculators/calculators.component';
 
 export const routing: ModuleWithProviders = RouterModule.forChild([
-  { path: 'user-panel', component: HomeComponent, canActivate: [AuthGuard]},
+  {
+    path: 'user-panel',
+    component: HomeComponent,
+    canActivate: [AuthGuard]
+  }
+  // {
+  //   path: 'calculators',
+  //   loadChildren: '../user-panel/calculators/calculators.module#CalculatorsModule'
+  // }
 ]);

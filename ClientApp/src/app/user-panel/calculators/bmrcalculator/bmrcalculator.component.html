@@ -1,0 +1,83 @@
+<div class="row">
+  <div class="col-md-4">
+    <h3>Wskaźnik podstawowej przemiany materii</h3>
+    <p>Tutaj tekst(opis)</p>
+  </div>
+  <div class="col-md-6">
+    <form (ngSubmit)="onSubmit()" #bmrForm="ngForm">
+      <div class="form-group row">
+        <label for="sex" class="col-md-2 col-form-label">Płeć</label>
+        <div class="btn-group btn-group-toggle col-md-4" data-toggle="buttons">
+          <label class="btn btn-secondary active">
+            <input type="radio" name="options" id="option1" autocomplete="off" checked> Mężczyzna
+          </label>
+          <label class="btn btn-secondary">
+            <input type="radio" name="options" id="option2" autocomplete="off"> Kobieta
+          </label>
+        </div>
+      </div>
+ 
+      <div class="form-group row">
+        <label for="weight" class="col-md-2 col-form-label">Waga</label>
+        <div class="col-md-4">
+          <input type="text" class="form-control" id="weight" [(ngModel)]="model.weight" name="weight">
+        </div>
+      </div>
+ 
+      <div class="form-group row">
+        <label for="height" class="col-md-2 col-form-label">Wzrost</label>
+        <div class="col-md-4">
+          <input type="text" class="form-control" id="height" [(ngModel)]="model.height" name="height">
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="age" class="col-md-2 col-form-label">Wiek</label>
+        <div class="col-md-4">
+          <input type="text" class="form-control" id="age" [(ngModel)]="model.age" name="age">
+        </div>
+      </div>
+      <br/>
+      <button type="submit" class="btn btn-success" [disabled]="!bmrForm.form.valid">Policz</button>
+    </form>
+  </div>
+</div>
+
+<!-- <div class="row">
+  <div class="col-md-6">
+    <form #f="ngForm" novalidate (ngSubmit)="registerUser(f)">
+      <div class="form-group">
+        <label for="first-name">First name</label>
+        <input type="text" class="form-control" id="first-name" placeholder="First name" name="firstName" tmFocus
+          ngModel>
+      </div>
+      <div class="form-group">
+        <label for="last-name">Last name</label>
+        <input type="text" class="form-control" id="last-name" placeholder="Last name" name="lastName" ngModel>
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input id="email" type="text" required name="email" validateEmail class="form-control" placeholder="Email"
+          ngModel #email="ngModel">
+        <small [hidden]="email.valid || (email.pristine && !submitted)" class="text-danger">Please enter a valid email</small>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" id="password" name="password" placeholder="Password" ngModel>
+      </div>
+      <div class="form-group">
+        <label for="location">Location</label>
+        <input type="text" class="form-control" id="location" placeholder="Location" required name="location" ngModel>
+      </div>
+
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary" [disabled]="f.invalid || isRequesting">Sign Up</button>
+      </div>
+
+      <div *ngIf="errors" class="alert alert-danger" role="alert">
+        <strong>Oops!</strong> {{errors}}
+      </div>
+
+    </form>
+  </div>
+</div> -->
