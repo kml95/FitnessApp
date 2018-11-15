@@ -3,11 +3,11 @@ import { CommonModule } from '@angular/common';
 
 import { CalculatorsRoutingModule } from './calculators-routing.module';
 import { BMRCalculatorComponent } from './bmrcalculator/bmrcalculator.component';
-import { CalculatorsComponent } from './calculators.component';
 import { HomeComponent } from './home/home.component';
 import { FormsModule } from '@angular/forms';
 import { BMICalculatorComponent } from './bmicalculator/bmicalculator.component';
 import { BodyFatCalculatorComponent } from './body-fat-calculator/body-fat-calculator.component';
+import { MainComponent } from './main/main.component';
 
 @NgModule({
   imports: [
@@ -17,8 +17,8 @@ import { BodyFatCalculatorComponent } from './body-fat-calculator/body-fat-calcu
   ],
   declarations: [
     BMRCalculatorComponent,
-    CalculatorsComponent,
     HomeComponent,
+    MainComponent,
     BMICalculatorComponent,
     BodyFatCalculatorComponent
   ]
