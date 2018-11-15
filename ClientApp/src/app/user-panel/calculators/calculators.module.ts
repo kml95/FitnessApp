@@ -6,6 +6,8 @@ import { BMRCalculatorComponent } from './bmrcalculator/bmrcalculator.component'
 import { CalculatorsComponent } from './calculators.component';
 import { HomeComponent } from './home/home.component';
 import { FormsModule } from '@angular/forms';
+import { BMICalculatorComponent } from './bmicalculator/bmicalculator.component';
+import { BodyFatCalculatorComponent } from './body-fat-calculator/body-fat-calculator.component';
 
 @NgModule({
   imports: [
@@ -13,7 +15,14 @@ import { FormsModule } from '@angular/forms';
     FormsModule,
     CalculatorsRoutingModule
   ],
-  declarations: [BMRCalculatorComponent, CalculatorsComponent, HomeComponent]
+  declarations: [
+    BMRCalculatorComponent,
+    CalculatorsComponent,
+    HomeComponent,
+    BMICalculatorComponent,
+    BodyFatCalculatorComponent
+  ]
 })
+
 export class CalculatorsModule {
  }
