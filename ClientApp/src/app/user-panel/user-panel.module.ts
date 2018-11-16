@@ -5,13 +5,15 @@ import { FormsModule } from '@angular/forms';
 import { routing } from './user-panel.routing';
 import { AuthGuard } from '../auth.guard';
 import { CalculatorsModule } from './calculators/calculators.module';
+import { DietModule } from './diet/diet.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     routing,
-    CalculatorsModule
+    CalculatorsModule,
+    DietModule
   ],
   declarations: [HomeComponent],
   providers:    [AuthGuard]
