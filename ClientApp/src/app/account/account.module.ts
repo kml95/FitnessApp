@@ -5,6 +5,7 @@ import { LoginFormComponent } from './login-form/login-form.component';
 import { RegistrationFormComponent } from './registration-form/registration-form.component';
 import { routing } from './account.routing';
 import { UserService } from '../shared/services/user.service';
+import { TransparentHeaderComponent } from '../transparent-header/transparent-header.component';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { UserService } from '../shared/services/user.service';
   ],
   declarations: [
     RegistrationFormComponent,
-    LoginFormComponent
+    LoginFormComponent,
+    // TransparentHeaderComponent
   ],
   providers: [ UserService ]
 })

@@ -1,8 +1,9 @@
+<!-- <app-transparent-header></app-transparent-header> -->
 <div class="text-center background-image center">
     <form class="form-signin" #f="ngForm" novalidate (ngSubmit)="login(f)">
         <h1 class="h3 mb-3 font-weight-normal text-white">Zaloguj się</h1>
         <label for="inputEmail" class="sr-only">Email address</label>
-        <input type="email" class="form-control" id="inputEmail" placeholder="Adres email" required="" autofocus="" [(ngModel)]="credentials.email"><br/>
+        <input type="email" class="form-control" id="inputEmail" placeholder="Adres email" name="email" required="" autofocus="" [(ngModel)]="credentials.email"><br/>
         <label for="inputPassword" class="sr-only">Password</label>
         <input type="password" class="form-control" id="inputPassword" required="" name="password" placeholder="Hasło" ngModel>
         <div class="checkbox mb-3 text-white">

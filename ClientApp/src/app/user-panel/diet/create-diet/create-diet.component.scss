@@ -1,0 +1,29 @@
+.container-fluid {
+    height: calc(100% - 172px);
+    display: flex;
+}
+
+.row {
+    margin: auto;
+}
+
+
+.card-img-top {
+    height: 400px;
+}
+
+.background-image {
+    background-color: black;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.card-img-overlay {
+    background-color: rgba(0,0,0,0.3);
+    padding-top: 50%;
+    text-align: center;
+
+    h4 {
+        padding-bottom: 20px;
+    }
+} 

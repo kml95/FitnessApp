@@ -4,7 +4,6 @@ import { RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 
 import { AuthGuard } from '../auth.guard';
-import { CalculatorsComponent } from './calculators/calculators.component';
 
 export const routing: ModuleWithProviders = RouterModule.forChild([
   {

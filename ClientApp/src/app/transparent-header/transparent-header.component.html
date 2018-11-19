@@ -1,0 +1,87 @@
+<header>
+    <nav *ngIf="route === '/login'|| route === '/register'; else elseTemplate" class="navbar navbar-expand-md navbar-fixed-top">
+        <a class="navbar-brand" routerLink="/">TrainSmart </a>
+        <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+            aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+
+            <ul *ngIf="status" class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" routerLinkActive="active" routerLink="/">Pulpit</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" (click)="logout()" routerLink="/">Wyloguj <span class="oi oi-account-logout"></span></a>
+                </li>
+            </ul>
+
+            <ul *ngIf="!status" class="nav navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" routerLinkActive="active" routerLink="/login">Zaloguj <span class="oi oi-account-login"></span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLinkActive="active" routerLink="/register">Dołącz <span class="oi oi-person"></span></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <ng-template #elseTemplate>
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+            <a class="navbar-brand" routerLink="/">TrainSmart </a>
+            <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+                aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+
+                <ul *ngIf="status" class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" routerLinkActive="active" routerLink="/">Pulpit</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" (click)="logout()" routerLink="/">Wyloguj <span class="oi oi-account-logout"></span></a>
+                    </li>
+                </ul>
+
+                <ul *ngIf="!status" class="nav navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" routerLinkActive="active" routerLink="/login">Zaloguj <span class="oi oi-account-login"></span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" routerLinkActive="active" routerLink="/register">Dołącz <span class="oi oi-person"></span></a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </ng-template>
+
+    <!-- <nav [ngClass]="{ 'navbar-fixed-top': route == '/login' || '/register', 'navbar-dark bg-dark': route != '/register' && '/login' }" class="navbar navbar-expand-md"> 
+
+        <a class="navbar-brand" routerLink="/">TrainSmart </a>
+        <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+            aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+
+            <ul *ngIf="status" class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" routerLinkActive="active" routerLink="/dashboard">Pulpit</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" (click)="logout()" routerLink="/">Wyloguj <span class="oi oi-account-logout"></span></a>
+                </li>
+            </ul>
+
+            <ul *ngIf="!status" class="nav navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" routerLinkActive="active" routerLink="/login">Zaloguj <span class="oi oi-account-login"></span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLinkActive="active" routerLink="/register">Dołącz <span class="oi oi-person"></span></a>
+                </li>
+            </ul>
+        </div>
+    </nav> -->
+</header>

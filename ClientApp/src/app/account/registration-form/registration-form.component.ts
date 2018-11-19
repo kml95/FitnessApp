@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { stringify } from '@angular/core/src/render3/util';
 
 @Component({
   selector: 'app-registration-form',
@@ -7,7 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegistrationFormComponent implements OnInit {
 
-  constructor() { }
+
+  model: {
+    firstName: string,
+    lastName: string,
+    email: string,
+    password: string
+  };
+
+  constructor() {
+    this.model = { firstName: null, lastName: null, email: null, password: null};
+  }
 
   ngOnInit() {
   }

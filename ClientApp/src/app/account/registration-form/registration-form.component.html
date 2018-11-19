@@ -1,12 +1,13 @@
+<!-- <app-transparent-header></app-transparent-header> -->
 <div class="text-center background-image center">
     <form class="form-register" #f="ngForm" novalidate (ngSubmit)="registerUser(f)">
         <h1 class="h3 mb-3 font-weight-normal text-white">Zarejestruj się</h1>
         <label for="inputFirstName" class="sr-only">Imię</label>
-        <input type="text" class="form-control" id="inputFirstName" placeholder="Imię" required="" autofocus="" [(ngModel)]="credentials.firstName"><br/>
+        <input type="text" class="form-control" id="inputFirstName" placeholder="Imię" name="firstName" required="" autofocus="" [(ngModel)]="model.firstName"><br/>
         <label for="inputLastName" class="sr-only">Nazwisko</label>
-        <input type="text" class="form-control" id="inputLastName" placeholder="Nazwisko" required="" autofocus="" [(ngModel)]="credentials.lastName"><br/>
+        <input type="text" class="form-control" id="inputLastName" placeholder="Nazwisko" name="lastName" required="" [(ngModel)]="model.lastName"><br/>
         <label for="inputEmail" class="sr-only">Email address</label>
-        <input type="email" class="form-control" id="inputEmail" placeholder="Adres email" required="" autofocus="" [(ngModel)]="credentials.email"><br/>
+        <input type="email" class="form-control" id="inputEmail" placeholder="Adres email" name="email" required="" [(ngModel)]="model.email"><br/>
         <label for="inputPassword" class="sr-only">Password</label>
         <input type="password" class="form-control" id="inputPassword" required="" name="password" placeholder="Hasło" ngModel>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Zarejestruj</button>
