@@ -2,13 +2,34 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FitnessApp.Data;
+using FitnessApp.Models.Entities;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace FitnessApp.Controllers
 {
     [Route("api/[controller]")]
+    [ApiController]
     public class SampleDataController : Controller
     {
+
+        private readonly ApplicationDbContext appContext;
+
+        public SampleDataController(ApplicationDbContext appContext)
+        {
+            this.appContext = appContext;
+        }
+
+        [HttpGet("carbohydrates")]
+        public async Task<IEnumerable<string>> GetCarbohydrates()
+        {
+            var products = await appContext.Meals.Where(m => m.Id == 2).SelectMany(m => m.ProductMeals).Select(pm => pm.Product.Name).ToListAsync();
+
+            return products;
+        }
+
+
         private static string[] Summaries = new[]
         {
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"

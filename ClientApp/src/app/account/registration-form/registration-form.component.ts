@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { stringify } from '@angular/core/src/render3/util';
+import { UserService } from 'src/app/shared/services/user.service';
+import { Router } from '@angular/router';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-registration-form',
@@ -8,6 +10,7 @@ import { stringify } from '@angular/core/src/render3/util';
 })
 export class RegistrationFormComponent implements OnInit {
 
+  ifRegister: boolean;
 
   model: {
     firstName: string,
@@ -16,11 +19,17 @@ export class RegistrationFormComponent implements OnInit {
     password: string
   };
 
-  constructor() {
+  constructor(private userService: UserService, private router: Router) {
     this.model = { firstName: null, lastName: null, email: null, password: null};
+    this.ifRegister = false;
   }
 
   ngOnInit() {
+  }
+
+  registerUser(model: NgForm) {
+    this.userService.register(model.value.email, model.value.password, model.value.firstName, model.value.lastName)
+    .subscribe(() => this.ifRegister = true);
   }
 
 }

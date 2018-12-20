@@ -13,5 +13,13 @@ namespace FitnessApp.Models.Entities
         public int Carbohydrates { get; set; }
         public int Protein { get; set; }
         public int Fat { get; set; }
+        public ProductCategory Category { get; set; }
+
+        public virtual ICollection<ProductMeal> ProductMeals { get; set; }
+
+        public enum ProductCategory
+        {
+            CARBOHYDRATES, PROTEIN, FAT
+        }
     }
 }

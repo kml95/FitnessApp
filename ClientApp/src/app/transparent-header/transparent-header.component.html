@@ -27,7 +27,7 @@
         </div>
     </nav>
     <ng-template #elseTemplate>
-        <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top ">
             <a class="navbar-brand" routerLink="/">TrainSmart </a>
             <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
                 aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
@@ -54,6 +54,26 @@
                 </ul>
             </div>
         </nav>
+        <!-- <nav class="navbar navbar-dark navbar-expand-md fixed-top bg-dark flex-md-nowrap p-0 shadow font-size">
+            <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Company name</a>
+            <ul *ngIf="status" class="navbar-nav px-3 ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/">Pulpit</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" (click)="logout()" routerLink="/">Wyloguj <span class="oi oi-account-logout"></span></a>
+                </li>
+            </ul>
+
+            <ul *ngIf="!status" class="navbar-nav px-3 ml-auto">
+                <li class="nav-item text-nowrap">
+                    <a class="nav-link" routerLinkActive="active" routerLink="/login">Zaloguj <span class="oi oi-account-login"></span></a>
+                </li>
+                <li class="nav-item text-nowrap">
+                    <a class="nav-link" routerLinkActive="active" routerLink="/register">Dołącz <span class="oi oi-person"></span></a>
+                </li>
+            </ul>
+        </nav> -->
     </ng-template>
 
     <!-- <nav [ngClass]="{ 'navbar-fixed-top': route == '/login' || '/register', 'navbar-dark bg-dark': route != '/register' && '/login' }" class="navbar navbar-expand-md"> 

@@ -1,19 +1,27 @@
 <!-- <app-transparent-header></app-transparent-header> -->
 <div class="text-center background-image center">
     <form class="form-register" #f="ngForm" novalidate (ngSubmit)="registerUser(f)">
+        <div *ngIf="ifRegister" class="alert alert-success" role="alert">
+            Account created successfuly!
+        </div>
         <h1 class="h3 mb-3 font-weight-normal text-white">Zarejestruj się</h1>
         <label for="inputFirstName" class="sr-only">Imię</label>
-        <input type="text" class="form-control" id="inputFirstName" placeholder="Imię" name="firstName" required="" autofocus="" [(ngModel)]="model.firstName"><br/>
+        <input type="text" class="form-control" id="inputFirstName" placeholder="Imię" name="firstName" required="" autofocus="" ngModel><br/>
         <label for="inputLastName" class="sr-only">Nazwisko</label>
-        <input type="text" class="form-control" id="inputLastName" placeholder="Nazwisko" name="lastName" required="" [(ngModel)]="model.lastName"><br/>
+        <input type="text" class="form-control" id="inputLastName" placeholder="Nazwisko" name="lastName" required="" ngModel><br/>
         <label for="inputEmail" class="sr-only">Email address</label>
-        <input type="email" class="form-control" id="inputEmail" placeholder="Adres email" name="email" required="" [(ngModel)]="model.email"><br/>
+        <input type="email" class="form-control" id="inputEmail" placeholder="Adres email" name="email" required="" ngModel><br/>
         <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" class="form-control" id="inputPassword" required="" name="password" placeholder="Hasło" ngModel>
+        <input type="password" class="form-control" id="inputPassword" name="password" required="" placeholder="Hasło" ngModel>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Zarejestruj</button>
         <p class="mt-5 mb-3 text-muted">© 2018-2019</p>
         <div *ngIf="errors" class="alert alert-danger" role="alert">
             <strong>Oops!</strong> {{errors}}
         </div>
     </form>
+
+    
+
 </div>
+
+

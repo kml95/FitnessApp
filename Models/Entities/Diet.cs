@@ -5,20 +5,17 @@ using System.Threading.Tasks;
 
 namespace FitnessApp.Models.Entities
 {
-    public class Meal
+    public class Diet
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public string Proportions { get; set; }
-        public MealType Type { get; set; }
+        public int Calories { get; set; }
+        public int Meals { get; set; }
+        public DateTime Created { get; set; }
+        public bool DietCurrent { get; set; }
 
-        public virtual ICollection<ProductMeal> ProductMeals { get; set; }
+        public int UserId { get; set; }
+        public virtual AppUser User { get; set; }
         public virtual ICollection<MealDiet> MealDiets { get; set; }
-
-
-        public enum MealType
-        {
-            BREAKFAST, LUNCH, DINNER, SNACK, SUPPER
-        }
     }
 }

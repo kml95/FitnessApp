@@ -16,24 +16,15 @@ namespace FitnessApp.Controllers
     [ApiController]
     public class AccountsController : ControllerBase
     {
-        private readonly ApplicationDbContext _appDbContext;
-        private readonly UserManager<AppUser> _userManager;
-        //private readonly IMappewr _mapper;
+        private readonly ApplicationDbContext appContext;
+        private readonly UserManager<AppUser> userManager;
 
-        //public AccountsController(UserManager<AppUser> userManager, IMapper mapper, ApplicationDbContext appDbContext)
-        //{
-        //    _userManager = userManager;
-        //    _mapper = mapper;
-        //    _appDbContext = appDbContext;
-        //}
-
-        public AccountsController(UserManager<AppUser> userManager, ApplicationDbContext appDbContext)
+        public AccountsController(UserManager<AppUser> userManager, ApplicationDbContext appContext)
         {
-            _userManager = userManager;
-            _appDbContext = appDbContext;
+            this.userManager = userManager;
+            this.appContext = appContext;
         }
 
-        // POST api/accounts
         [HttpPost("[action]")]
         public async Task<IActionResult> Register([FromBody]RegistrationViewModel model)
         {
@@ -42,18 +33,13 @@ namespace FitnessApp.Controllers
                 return BadRequest(ModelState);
             }
 
-            //var userIdentity = _mapper.Map<AppUser>(model);
-
             var userIdentity = new AppUser { UserName = model.Email, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName }; 
 
-            var result = await _userManager.CreateAsync(userIdentity, model.Password);
+            var result = await userManager.CreateAsync(userIdentity, model.Password);
 
-            if (!result.Succeeded) return new BadRequestObjectResult(Errors.AddErrorsToModelState(result, ModelState));
+            if (!result.Succeeded) return BadRequest(Errors.AddErrorsToModelState(result, ModelState));
 
-            //await _appDbContext.Customers.AddAsync(new Customer { IdentityId = userIdentity.Id, Location = model.Location });
-            //await _appDbContext.SaveChangesAsync();
-
-            return new OkObjectResult("Account created");
+            return Ok();
         }
     }
 }

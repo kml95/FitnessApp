@@ -32,7 +32,6 @@ export class TransparentHeaderComponent implements OnInit, OnDestroy {
         this.route = '';
       }
     });
-
     this.subscription = this.userService.authNavStatus$.subscribe(status => this.status = status);
   }
 

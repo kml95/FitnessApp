@@ -1,16 +1,15 @@
-<h1 class="h2 font-weight-normal" style="text-align:center; padding-top:40px">Jaki jest twój cel?</h1>
-<div class="container-fluid">
+<h1 class="h2 font-weight-normal" [hidden]="!showMainPage" style="text-align:center; padding-top:88px">Jaki jest twój
+  cel?</h1>
+<div class="container-fluid" [hidden]="!showMainPage">
   <div class="row">
     <div class="col-md-4">
       <div class="card img-fluid">
         <img class="card-img-top" src="/assets/food2.jpeg" alt="Card image">
         <div class="card-img-overlay">
           <h4 class="card-title text-white"><b>Zwiększ masę mięśniową</b></h4>
-          <!-- <p class="card-text">Some example text some example text. Some example text some example text. Some example
-            text some example text. Some example text some example text.</p> -->
-            <div class="text-center">
-                <a href="#" class="btn btn-primary">Wybierz</a>
-            </div><br />
+          <div class="text-center">
+            <button class="btn btn-primary" (click)="showDietForm = true; showMainPage = false; dietType = 1;">Wybierz</button>
+          </div><br />
         </div>
       </div>
     </div>
@@ -18,12 +17,10 @@
       <div class="card img-fluid">
         <img class="card-img-top" src="/assets/food3.jpeg" alt="Card image">
         <div class="card-img-overlay">
-            <h4 class="card-title text-white"><b>Wyrzeźb mięśnie</b></h4>
-          <!-- <p class="card-text">Some example text some example text. Some example text some example text. Some example
-            text some example text. Some example text some example text.</p> -->
-            <div class="text-center">
-                <a href="#" class="btn btn-primary">Wybierz</a>
-            </div><br />
+          <h4 class="card-title text-white"><b>Wyrzeźb mięśnie</b></h4>
+          <div class="text-center">
+            <button class="btn btn-primary" (click)="showDietForm = true; showMainPage = false; dietType = 2;">Wybierz</button>
+          </div><br />
         </div>
       </div>
     </div>
@@ -31,14 +28,87 @@
       <div class="card img-fluid">
         <img class="card-img-top" src="/assets/food1.jpeg" alt="Card image">
         <div class="card-img-overlay">
-            <h4 class="card-title text-white"><b>Utrzymaj wagę</b></h4>
-          <!-- <p class="card-text">Some example text some example text. Some example text some example text. Some example
-            text some example text. Some example text some example text.</p> -->
-            <div class="text-center">
-                <a href="#" class="btn btn-primary">Wybierz</a>
-            </div><br />
+          <h4 class="card-title text-white"><b>Utrzymaj wagę</b></h4>
+          <div class="text-center">
+            <button class="btn btn-primary" (click)="showDietForm = true; showMainPage = false; dietType = 3;">Wybierz</button>
+          </div><br />
         </div>
       </div>
+    </div>
+  </div>
+</div>
+
+<div [hidden]="!showDietForm">
+  <div class="row">
+    <div class="col-md-4" *ngIf="dietType == 1">
+      <h3>Dieta na wzrost mięśni</h3>
+      <p>Jest to dieta przeznaczona tym, którzy chcą zwiększyć obwody swoich mięsni oraz
+
+      </p>
+      <p>aasdasdasdsad</p>
+    </div>
+    <div class="col-md-4" *ngIf="dietType == 2">
+      <h3>Dieta na wyrzeźbienie mięsni</h3>
+      <p>Jest to dieta przeznaczona tym, którzy chcą poprawić wygląd swoich mięsni oraz
+
+      </p>
+      <p>aasdasdasdsad</p>
+    </div>
+    <div class="col-md-4" *ngIf="dietType == 3">
+      <h3>Dieta podtrzymaniowa</h3>
+      <p>Jest to dieta przeznaczona tym, którzy chcą utrzymać swoją obecną formę oraz
+
+      </p>
+      <p>aasdasdasdsad</p>
+    </div>
+    <div class="col-md-6">
+      <form class="form-createDiet" #f="ngForm" novalidate (ngSubmit)="onSubmit()">
+        <h1 class="h3 mb-3 font-weight-normal">Wprowadź swoje dane</h1>
+
+        <label for="inputSex">Płeć</label>
+
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+            <label class="form-check-label" for="inlineRadio2">Mężczyzna</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
+            <label class="form-check-label" for="inlineRadio3">Kobieta</label>
+          </div>
+
+        <label for="inputFirstName" class="sr-only">Waga</label>
+        <input type="text" class="form-control" id="inputFirstName" placeholder="Waga" name="firstName" required=""
+          autofocus="" [(ngModel)]="model.weight"><br />
+        <label for="inputLastName" class="sr-only">Wzrsot</label>
+        <input type="text" class="form-control" id="inputLastName" placeholder="Wzrost" name="lastName" required=""
+          [(ngModel)]="model.height"><br />
+        <label for="inputEmail" class="sr-only">Wiek</label>
+        <input type="text" class="form-control" id="inputEmail" placeholder="Wiek" name="email" required="" [(ngModel)]="model.age"><br />
+        
+        <label for="inputMealsAmount">Ilość posiłków dziennie</label>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+            <label class="form-check-label" for="inlineRadio1">3</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+            <label class="form-check-label" for="inlineRadio2">4</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
+            <label class="form-check-label" for="inlineRadio3">5</label>
+          </div>
+        
+        
+        
+        <div class="row">
+          <button class="btn btn-primary" type="submit">Wygeneruj dietę</button>
+          <button class="btn btn-primary" style="margin-left: 2%" (click)="showDietForm = false; showMainPage = true;">Cofnij</button>
+        </div>
+        <div *ngIf="errors" class="alert alert-danger" role="alert">
+          <strong>Oops!</strong> {{errors}}
+        </div>
+      </form>
     </div>
   </div>
 </div>
