@@ -14,7 +14,7 @@ namespace FitnessApp.Models.Entities
         public DateTime Created { get; set; }
         public bool DietCurrent { get; set; }
 
-        public int UserId { get; set; }
+        public string UserId { get; set; }
         public virtual AppUser User { get; set; }
         public virtual ICollection<MealDiet> MealDiets { get; set; }
     }

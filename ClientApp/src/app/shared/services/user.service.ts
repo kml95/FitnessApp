@@ -14,7 +14,7 @@ import { catchError, debounceTime, distinctUntilChanged, map, switchMap } from '
 
 export class UserService extends BaseService {
 
-  baseUrl = '';
+  private baseUrl = '';
 
   private httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })

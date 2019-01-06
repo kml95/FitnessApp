@@ -1,4 +1,6 @@
 using FitnessApp.Auth;
+using FitnessApp.DAL.Repositories;
+using FitnessApp.DAL.Repositories.Abstracts;
 using FitnessApp.Data;
 using FitnessApp.Helpers;
 using FitnessApp.Models;
@@ -44,6 +46,7 @@ namespace FitnessApp
                 .AddDefaultTokenProviders();
 
             services.AddSingleton<IJwtFactory, JwtFactory>();
+            services.AddScoped<IDietRepository, DietRepository>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
@@ -79,7 +82,8 @@ namespace FitnessApp
 
                 RequireExpirationTime = false,
                 ValidateLifetime = true,
-                ClockSkew = TimeSpan.Zero
+                ClockSkew = TimeSpan.Zero,
+                //NameClaimType = "https://myshcemadefinedkey/preferred_username"
             };
 
             services.AddAuthentication(options =>
@@ -113,13 +117,12 @@ namespace FitnessApp
                 app.UseExceptionHandler("/Error");
                 app.UseHsts();
             }
-
-            app.UseAuthentication();
+            
             app.UseHttpsRedirection();
-
-
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
+
+            app.UseAuthentication();
 
             app.UseMvc(routes =>
             {

@@ -1,13 +1,14 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CreateDietComponent } from './create-diet/create-diet.component';
+import { UserDietComponent } from './user-diet/user-diet.component';
 
 const routes: Routes = [
   {
-    path: 'user-panel/dieta',
-    component: CreateDietComponent,
-    children: []
-  }
+    path: '',
+    component: UserDietComponent,
+  },
+  { path: 'stworz', component: CreateDietComponent}
 ];
 
 @NgModule({

@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using FitnessApp.Data;
+using FitnessApp.Helpers;
 using FitnessApp.Models.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,7 +15,6 @@ namespace FitnessApp.Controllers
     [ApiController]
     public class SampleDataController : Controller
     {
-
         private readonly ApplicationDbContext appContext;
 
         public SampleDataController(ApplicationDbContext appContext)
@@ -22,11 +23,34 @@ namespace FitnessApp.Controllers
         }
 
         [HttpGet("carbohydrates")]
-        public async Task<IEnumerable<string>> GetCarbohydrates()
+        public async Task<List<MealsProductsDTO>> GetCarbohydrates()
         {
-            var products = await appContext.Meals.Where(m => m.Id == 2).SelectMany(m => m.ProductMeals).Select(pm => pm.Product.Name).ToListAsync();
+
+            var products = await appContext.Users
+                .SelectMany(u => u.Diets).Where(d => d.DietCurrent == true)  //.Where(d => d.UserId.Equals(HttpContext.User.FindFirst(Constants.Strings.JwtClaimIdentifiers.Id).Value))
+                .SelectMany(d => d.MealDiets)
+                .Select(md => md.Meal)
+                .Select(m => new MealsProductsDTO
+                {
+                    MealName = m.Name,
+                    MealProportions = m.Proportions,
+                    ProductsNames = m.ProductMeals.Select(pm => pm.Product.Name).ToList()
+                })
+                //.SelectMany(m => m.ProductMeals)
+                //.Select(pm => pm.Product.Name)
+                .ToListAsync();
+
 
             return products;
+        }
+
+        public class MealsProductsDTO
+        {
+            //public string MealName { get; set; }
+            //public string Proportions { get; set; }
+            public string MealName { get; set; }
+            public string MealProportions { get; set; }
+            public IEnumerable<string> ProductsNames { get; set; }
         }
 
 

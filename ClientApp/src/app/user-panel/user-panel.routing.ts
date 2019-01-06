@@ -4,15 +4,20 @@ import { RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 
 import { AuthGuard } from '../auth.guard';
+import { DietModule } from './diet/diet.module';
 
 export const routing: ModuleWithProviders = RouterModule.forChild([
   {
-    path: 'user-panel',
+    path: '',
     component: HomeComponent,
-    canActivate: [AuthGuard]
-  }
-  // {
-  //   path: 'calculators',
-  //   loadChildren: '../user-panel/calculators/calculators.module#CalculatorsModule'
-  // }
+    canActivate: [AuthGuard],
+    children: [
+    //   // { path: '', component: HomeComponent},
+     { path: 'dieta', loadChildren: () => DietModule},
+    //  { path: 'dieta', loadChildren: './diet/diet.module#DietModule'}
+    //   // { path: 'bmi', component: BMICalculatorComponent},
+    //   // { path: 'bf', component: BodyFatCalculatorComponent}
+    ]
+  },
+
 ]);

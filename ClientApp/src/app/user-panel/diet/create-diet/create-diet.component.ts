@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { NumberValueAccessor } from '@angular/forms/src/directives';
+import { DietService } from 'src/app/shared/services/diet.service';
 
 @Component({
   selector: 'app-create-diet',
@@ -16,11 +18,12 @@ export class CreateDietComponent implements OnInit {
     sex: string,
     weight: number,
     height: number,
-    age: number
+    age: number,
+    mealsAmount: number
   };
 
-  constructor(private router: Router) {
-    this.model = { sex: 'male', weight: null, height: null, age: null };
+  constructor(private dietService: DietService, private router: Router) {
+    this.model = { sex: null, weight: null, height: null, age: null, mealsAmount: null };
    }
 
   ngOnInit() {
@@ -35,19 +38,23 @@ export class CreateDietComponent implements OnInit {
     }
 
     let calories: number;
-    if (this.dietType === 1) {
+    if (this.dietType === DietType.Mass) {
       calories = Math.round(bmr + (0.1 * bmr) + (0.3 * bmr) + 600);
-    } else if (this.dietType === 2) {
+    } else if (this.dietType === DietType.Reduction) {
       calories = Math.round(bmr + (0.1 * bmr) + (0.3 * bmr));
     } else {
       calories = Math.round(bmr + (0.1 * bmr) + (0.3 * bmr) + 300);
     }
 
 
-    this.router.navigate(['/user-panel']);
+    this.dietService.create('asd', 2222, 5).subscribe(() => console.log(22));
 
     console.log(this.dietType);
+    console.log(this.model.sex);
+    console.log(this.model.mealsAmount);
     console.log(calories);
+
+    //this.router.navigate(['/user-panel']);
   }
 }
 

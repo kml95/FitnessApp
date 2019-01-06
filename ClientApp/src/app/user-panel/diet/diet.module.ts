@@ -4,6 +4,8 @@ import { CommonModule } from '@angular/common';
 import { DietRoutingModule } from './diet-routing.module';
 import { CreateDietComponent } from './create-diet/create-diet.component';
 import { FormsModule } from '@angular/forms';
+import { DietService } from 'src/app/shared/services/diet.service';
+import { UserDietComponent } from './user-diet/user-diet.component';
 
 @NgModule({
   imports: [
@@ -11,6 +13,7 @@ import { FormsModule } from '@angular/forms';
     FormsModule,
     DietRoutingModule
   ],
-  declarations: [CreateDietComponent]
+  declarations: [CreateDietComponent, UserDietComponent],
+  providers: [DietService],
 })
 export class DietModule { }

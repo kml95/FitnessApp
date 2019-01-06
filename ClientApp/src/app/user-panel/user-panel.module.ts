@@ -13,7 +13,7 @@ import { DietModule } from './diet/diet.module';
     FormsModule,
     routing,
     CalculatorsModule,
-    DietModule
+    // DietModule,
   ],
   declarations: [HomeComponent],
   providers:    [AuthGuard]

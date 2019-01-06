@@ -17,6 +17,8 @@ namespace FitnessApp.Data
 
             modelBuilder.Entity<ProductMeal>().HasKey(sc => new { sc.ProductId, sc.MealId });
             modelBuilder.Entity<MealDiet>().HasKey(sc => new { sc.MealId, sc.DietId });
+
+
         }
 
         public virtual DbSet<Product> Products { get; set; }
