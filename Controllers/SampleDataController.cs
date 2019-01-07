@@ -27,7 +27,7 @@ namespace FitnessApp.Controllers
         {
 
             var products = await appContext.Users
-                .SelectMany(u => u.Diets).Where(d => d.DietCurrent == true)  //.Where(d => d.UserId.Equals(HttpContext.User.FindFirst(Constants.Strings.JwtClaimIdentifiers.Id).Value))
+                .SelectMany(u => u.Diets).Where(d => d.DietCurrent)  //.Where(d => d.UserId.Equals(HttpContext.User.FindFirst(Constants.Strings.JwtClaimIdentifiers.Id).Value))
                 .SelectMany(d => d.MealDiets)
                 .Select(md => md.Meal)
                 .Select(m => new MealsProductsDTO

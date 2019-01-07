@@ -27,19 +27,64 @@ namespace FitnessApp.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<MealsProductsDTO>> Get()
+        public async Task<MealsProductsDTO> Get()
         {
-            var mealsProducts = await appDbContext.Diets
-                .Where(d => d.DietCurrent == true && d.UserId.Equals(HttpContext.User.FindFirst(Constants.Strings.JwtClaimIdentifiers.Id).Value)) 
-                .SelectMany(d => d.MealDiets)
-                .Select(md => md.Meal)
-                .Select(m => new MealsProductsDTO
+            var mealsProducts = await appDbContext.Diets.AsNoTracking()
+                .Where(d => d.DietCurrent && d.UserId.Equals(HttpContext.User.FindFirst(Constants.Strings.JwtClaimIdentifiers.Id).Value))
+                .Select(d => new MealsProductsDTO
                 {
-                    MealName = m.Name,
-                    MealProportions = m.Proportions,
-                    ProductsNames = m.ProductMeals.Select(pm => pm.Product.Name).ToList()
+                    DietName = d.Name,
+                    Calories = d.Calories,
+                    MealsAmount = d.Meals,
+                    UserName = d.User.FirstName,
+                    Meals = d.MealDiets
+                    .Select(md => md.Meal)
+                    .Select(m => new MealsProductsDTO.MealsDTO
+                    {
+                        Name = m.Name,
+                        Type = m.Type.ToString(),
+                        Proportions = m.Proportions,
+                        ProductsNames = m.ProductMeals.Select(pm => pm.Product.Name).ToList()
+                    }).ToList()
                 })
-                .ToListAsync();
+                //.Select(m => new MealsProductsDTO
+                //{
+                //    DietName = m.DietName,
+                //    Calories = m.Calories,
+                //    MealsAmount = m.MealsAmount,
+                //    Meals = m.Meals,
+                //    UserName = m.UserName
+                //})
+                .FirstOrDefaultAsync();
+
+            var mealTypes = mealsProducts.Meals.Select(m => m.Type).ToList();
+
+            var index = 0;
+            foreach (var item in mealTypes)
+            {
+                switch (item)
+                {
+                    case "BREAKFAST":
+                        mealsProducts.Meals.ElementAt(index).Type = "Śniadanie";
+                        break;
+                    case "LUNCH":
+                        mealsProducts.Meals.ElementAt(index).Type = "II śniadanie";
+                        break;
+                    case "DINNER":
+                        mealsProducts.Meals.ElementAt(index).Type = "Obiad";
+                        break;
+                    case "SNACK":
+                        mealsProducts.Meals.ElementAt(index).Type = "Podwieczorek";
+                        break;
+                    case "SUPPER":
+                        mealsProducts.Meals.ElementAt(index).Type = "Kolacja";
+                        break;
+                    default:
+                        mealsProducts.Meals.ElementAt(index).Type = "Typ nieznany";
+                        break;
+                }
+                index++;
+            }
 
             return mealsProducts;
         }
@@ -133,9 +178,19 @@ namespace FitnessApp.Controllers
 
         public class MealsProductsDTO
         {
-            public string MealName { get; set; }
-            public string MealProportions { get; set; }
-            public IEnumerable<string> ProductsNames { get; set; }
+            public string DietName { get; set; }
+            public int MealsAmount { get; set; }
+            public int Calories { get; set; }
+            public string UserName { get; set; }
+            public IEnumerable<MealsDTO> Meals { get; set; }
+
+            public class MealsDTO
+            {
+                public string Name { get; set; }
+                public string Type { get; set; }
+                public string Proportions { get; set; }
+                public IEnumerable<string> ProductsNames { get; set; }
+            }
         }
     }
 }

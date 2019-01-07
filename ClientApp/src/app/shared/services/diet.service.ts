@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { ConfigService } from '../utils/config.service';
 import { BaseService } from './base.service';
 import { Observable } from 'rxjs';
-import { MealsProducts } from '../models/meals-products.interface';
+import { Diet } from '../models/diet.interface';
 
 @Injectable()
 export class DietService extends BaseService {
@@ -26,9 +26,9 @@ export class DietService extends BaseService {
 
 
 
-  get(): Observable<MealsProducts []> {
+  get(): Observable<Diet> {
     const authToken = localStorage.getItem('auth_token');
     const headers = new HttpHeaders().set('Authorization', 'Bearer ' + authToken);
-    return this.http.get<MealsProducts []>(`${this.baseUrl}/diets`, {headers});
+    return this.http.get<Diet>(`${this.baseUrl}/diets`, {headers});
   }
 }
