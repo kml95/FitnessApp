@@ -5,6 +5,7 @@ import { HomeComponent } from './home/home.component';
 
 import { AuthGuard } from '../auth.guard';
 import { DietModule } from './diet/diet.module';
+import { TrainingModule } from './training/training.module';
 
 export const routing: ModuleWithProviders = RouterModule.forChild([
   {
@@ -12,12 +13,8 @@ export const routing: ModuleWithProviders = RouterModule.forChild([
     component: HomeComponent,
     canActivate: [AuthGuard],
     children: [
-    //   // { path: '', component: HomeComponent},
      { path: 'dieta', loadChildren: () => DietModule},
-    //  { path: 'dieta', loadChildren: './diet/diet.module#DietModule'}
-    //   // { path: 'bmi', component: BMICalculatorComponent},
-    //   // { path: 'bf', component: BodyFatCalculatorComponent}
+     { path: 'trening', loadChildren: () => TrainingModule},
     ]
   },
-
 ]);

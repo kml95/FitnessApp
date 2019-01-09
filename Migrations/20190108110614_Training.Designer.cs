@@ -4,14 +4,16 @@ using FitnessApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FitnessApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190108110614_Training")]
+    partial class Training
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -113,7 +115,7 @@ namespace FitnessApp.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Exercises");
+                    b.ToTable("Exercise");
 
                     b.HasData(
                         new
@@ -422,7 +424,7 @@ namespace FitnessApp.Migrations
 
                     b.HasIndex("TrainingId");
 
-                    b.ToTable("ExerciseTrainings");
+                    b.ToTable("ExerciseTraining");
                 });
 
             modelBuilder.Entity("FitnessApp.Models.Entities.Meal", b =>
@@ -432,8 +434,6 @@ namespace FitnessApp.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Name");
-
-                    b.Property<string>("Photo");
 
                     b.Property<string>("Proportions");
 
@@ -509,13 +509,15 @@ namespace FitnessApp.Migrations
 
                     b.Property<bool>("TrainingCurrent");
 
-                    b.Property<string>("UserId");
+                    b.Property<int>("UserId");
+
+                    b.Property<string>("UserId1");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserId1");
 
-                    b.ToTable("Trainings");
+                    b.ToTable("Training");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -678,7 +680,7 @@ namespace FitnessApp.Migrations
                 {
                     b.HasOne("FitnessApp.Models.Entities.AppUser", "User")
                         .WithMany()
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId1");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

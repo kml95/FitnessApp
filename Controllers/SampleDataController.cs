@@ -13,35 +13,45 @@ namespace FitnessApp.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class SampleDataController : Controller
+    public class SampleDataController : ControllerBase
     {
-        private readonly ApplicationDbContext appContext;
+        private readonly ApplicationDbContext appDbContext;
 
-        public SampleDataController(ApplicationDbContext appContext)
+        public SampleDataController(ApplicationDbContext appDbContext)
         {
-            this.appContext = appContext;
+            this.appDbContext = appDbContext;
         }
 
         [HttpGet("carbohydrates")]
-        public async Task<List<MealsProductsDTO>> GetCarbohydrates()
+        public async Task<IActionResult> GetCarbohydrates()
         {
 
-            var products = await appContext.Users
-                .SelectMany(u => u.Diets).Where(d => d.DietCurrent)  //.Where(d => d.UserId.Equals(HttpContext.User.FindFirst(Constants.Strings.JwtClaimIdentifiers.Id).Value))
-                .SelectMany(d => d.MealDiets)
-                .Select(md => md.Meal)
-                .Select(m => new MealsProductsDTO
+            var exercises = await appDbContext.Exercises.AsNoTracking().Select(e => new
+            {
+                chest = appDbContext.Exercises.AsNoTracking().Where(e2 => e2.Muscle == Muscle.CHEST).GroupBy(e2 => e2.Stage)
+                .Select(g => new 
                 {
-                    MealName = m.Name,
-                    MealProportions = m.Proportions,
-                    ProductsNames = m.ProductMeals.Select(pm => pm.Product.Name).ToList()
-                })
-                //.SelectMany(m => m.ProductMeals)
-                //.Select(pm => pm.Product.Name)
-                .ToListAsync();
 
+                    // Stage = g.Key,
+                    Exercises = g.ToList()
+                }).Select(x => x.Exercises.OrderBy(o => Guid.NewGuid()).FirstOrDefault()).ToList(),
 
-            return products;
+                chest2 = appDbContext.Exercises.AsNoTracking()
+                .Where(e2 => e2.Muscle == Muscle.CHEST)
+                .GroupBy(e2 => e2.Stage)
+                .Select(g => g.ToList().OrderBy(o => Guid.NewGuid()).FirstOrDefault())
+                .ToList(),
+
+                lunch = appDbContext.Meals.AsNoTracking().Where(m => m.Type == Meal.MealType.LUNCH).OrderBy(o => Guid.NewGuid()).First(),
+                dinner = appDbContext.Meals.AsNoTracking().Where(m => m.Type == Meal.MealType.DINNER).OrderBy(o => Guid.NewGuid()).First(),
+                snack = appDbContext.Meals.AsNoTracking().Where(m => m.Type == Meal.MealType.SNACK).OrderBy(o => Guid.NewGuid()).First(),
+                supper = appDbContext.Meals.AsNoTracking().Where(m => m.Type == Meal.MealType.SUPPER).OrderBy(o => Guid.NewGuid()).First(),
+                // ifAlreadyExistDiet = appDbContext.Diets.AsNoTracking().Any(d => d.UserId.Equals(HttpContext.User.FindFirst(Constants.Strings.JwtClaimIdentifiers.Id).Value))
+            }).FirstOrDefaultAsync();
+
+           // var a = exercises.chest.
+
+            return Ok();
         }
 
         public class MealsProductsDTO

@@ -5,17 +5,22 @@ using System.Threading.Tasks;
 
 namespace FitnessApp.Models.Entities
 {
-    public class Diet
+    public class Training
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public int Calories { get; set; }
-        public int Meals { get; set; }
+        public int Days { get; set; }
         public DateTime Created { get; set; }
-        public bool DietCurrent { get; set; }
+        public bool TrainingCurrent { get; set; }
+        public TrainingAim Aim { get; set; }
         public string UserId { get; set; }
 
         public virtual AppUser User { get; set; }
-        public virtual ICollection<MealDiet> MealDiets { get; set; }
+        public virtual ICollection<ExerciseTraining> ExerciseTrainings { get; set; }
+
+        public enum TrainingAim
+        {
+            MASS, REDUCTION, STRENGTH
+        }
     }
 }

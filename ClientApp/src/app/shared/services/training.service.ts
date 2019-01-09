@@ -3,10 +3,10 @@ import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { ConfigService } from '../utils/config.service';
 import { BaseService } from './base.service';
 import { Observable } from 'rxjs';
-import { Diet } from '../models/diet.interface';
+import { Training, TrainingAim } from '../models/training.interface';
 
 @Injectable()
-export class DietService extends BaseService {
+export class TrainingService extends BaseService {
 
   private baseUrl = '';
 
@@ -15,16 +15,16 @@ export class DietService extends BaseService {
     this.baseUrl = configService.getApiURI();
   }
 
-  create(name: string, calories: number, mealsAmount: number): Observable<number> {
-    const body = { name, calories, mealsAmount};
+  create(name: string, days: number, aim: TrainingAim): Observable<number> {
+    const body = { name, days, aim};
     const authToken = localStorage.getItem('auth_token');
     const headers = new HttpHeaders().set('Authorization', 'Bearer ' + authToken);
-    return this.http.post<number>(`${this.baseUrl}/diets/create`, body, {headers});
+    return this.http.post<number>(`${this.baseUrl}/trainings/create`, body, {headers});
   }
 
-  get(): Observable<Diet> {
+  get(): Observable<Training> {
     const authToken = localStorage.getItem('auth_token');
     const headers = new HttpHeaders().set('Authorization', 'Bearer ' + authToken);
-    return this.http.get<Diet>(`${this.baseUrl}/diets`, {headers});
+    return this.http.get<Training>(`${this.baseUrl}/trainings`, {headers});
   }
 }

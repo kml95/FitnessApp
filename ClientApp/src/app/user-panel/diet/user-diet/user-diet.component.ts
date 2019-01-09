@@ -17,7 +17,6 @@ export class UserDietComponent implements OnInit {
   ngOnInit() {
     this.dietService.get().subscribe(diet => {
       this.diet = diet;
-      // this.model = new Array<Meal>(diet.mealsAmount);
 
       for (let index = 0; index < this.diet.meals.length; index++) {
         const proportions = this.diet.meals[index].proportions.split(';').map(item => {
@@ -25,9 +24,9 @@ export class UserDietComponent implements OnInit {
           return Math.round(tmp);
         });
 
-        // this.model[index].name = this.diet.meals[index].name;
         const name = this.diet.meals[index].name;
         const type = this.diet.meals[index].type;
+        const photo = this.diet.meals[index].photo;
         let tmpProducts = new Array<Product>();
 
         for (let index2 = 0; index2 < this.diet.meals[index].productsNames.length; index2++) {
@@ -36,9 +35,8 @@ export class UserDietComponent implements OnInit {
             proportions[index2]
           );
           tmpProducts.push(tmp);
-          // this.model[index].products.push(tmp);
         }
-        const tmpMeal = new Meal(name, type, tmpProducts);
+        const tmpMeal = new Meal(name, type, photo, tmpProducts);
         this.model.push(tmpMeal);
         tmpProducts = [];
       }
@@ -46,14 +44,15 @@ export class UserDietComponent implements OnInit {
   }
 }
 
-export class Meal {
+class Meal {
   constructor(
     public name: string,
     public type: string,
+    public photo: string,
     public products: Product []) { }
 }
 
-export class Product {
+class Product {
   constructor(
   public name: string,
   public value: number) { }

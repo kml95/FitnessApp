@@ -11,6 +11,7 @@ import { DietService } from 'src/app/shared/services/diet.service';
 export class CreateDietComponent implements OnInit {
 
   dietType: DietType;
+  dietName: string;
   showDietForm = false;
   showMainPage = true;
 
@@ -40,27 +41,26 @@ export class CreateDietComponent implements OnInit {
     let calories: number;
     if (this.dietType === DietType.Mass) {
       calories = Math.round(bmr + (0.1 * bmr) + (0.3 * bmr) + 600);
+      this.dietName = 'Wzrost masy mięśniowej';
     } else if (this.dietType === DietType.Reduction) {
       calories = Math.round(bmr + (0.1 * bmr) + (0.3 * bmr));
+      this.dietName = 'Rzeźba mięśni';
     } else {
       calories = Math.round(bmr + (0.1 * bmr) + (0.3 * bmr) + 300);
+      this.dietName = 'Utrzymani wagi';
     }
 
-
-    this.dietService.create('asd', 2222, 5).subscribe(() => console.log(22));
-
-    console.log(this.dietType);
-    console.log(this.model.sex);
-    console.log(this.model.mealsAmount);
-    console.log(calories);
-
-    //this.router.navigate(['/user-panel']);
+    this.dietService.create(this.dietName, calories, this.model.mealsAmount)
+    .subscribe(() => {
+      console.log('Udało się pomyślnie stworzyć');
+      this.router.navigate(['/user-panel/dieta']);
+    });
   }
 }
 
 enum DietType {
   Mass = 1,
   Reduction = 2,
-  Maintemamce = 3
+  Maintenance = 3
 }
 

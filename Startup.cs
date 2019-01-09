@@ -8,7 +8,6 @@ using FitnessApp.Models.Entities;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
@@ -47,6 +46,7 @@ namespace FitnessApp
 
             services.AddSingleton<IJwtFactory, JwtFactory>();
             services.AddScoped<IDietRepository, DietRepository>();
+            services.AddScoped<ITrainingRepository, TrainingRepository>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 

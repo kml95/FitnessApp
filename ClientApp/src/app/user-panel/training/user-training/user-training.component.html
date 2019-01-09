@@ -1,0 +1,9 @@
+<div *ngIf="training">
+    <h1>Cześć, {{training.userName}}. Twoim celem jest {{training.aim}}</h1><br/>
+  
+    <div>
+        <h2>Poniedziałek - klatka piersiowa</h2><hr/>
+        <div *ngFor="let exercise of model.chest">
+          <p>1. {{exercise}}</p>  
+        </div><br/>
+    </div>

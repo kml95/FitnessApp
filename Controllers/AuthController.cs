@@ -34,7 +34,6 @@ namespace FitnessApp.Controllers
             {
                 return BadRequest(ModelState);
             }
-
             var identity = await GetClaimsIdentity(credentials.UserName, credentials.Password);
             if (identity == null)
             {

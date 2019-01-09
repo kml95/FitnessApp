@@ -5,25 +5,27 @@ using FitnessApp.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
+// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+
 namespace FitnessApp.Controllers
 {
     [Authorize]
     [Route("api/[controller]")]
-    public class DietsController : ControllerBase
+    public class TrainingsController : ControllerBase
     {
-        private readonly IDietRepository dietRepository;
+        private readonly ITrainingRepository trainingRepository;
 
-        public DietsController(IDietRepository dietRepository)
+        public TrainingsController(ITrainingRepository trainingRepository)
         {
-            this.dietRepository = dietRepository;
+            this.trainingRepository = trainingRepository;
         }
 
         [HttpGet]
         [ProducesResponseType(200)]
         [ProducesResponseType(404)]
-        public async Task<ActionResult<MealsProductsDTO>> Get()
+        public async Task<ActionResult<TrainingDTO>> Get()
         {
-            var model = await dietRepository.Get();
+            var model = await trainingRepository.Get();
 
             if (model == null) return NotFound();
 
@@ -33,14 +35,14 @@ namespace FitnessApp.Controllers
         [HttpPost("[action]")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
-        public async Task<ActionResult<int>> Create([FromBody]DietViewModel model)
+        public async Task<ActionResult<int>> Create([FromBody]TrainingViewModel model)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            return await dietRepository.Create(model);
+            return await trainingRepository.Create(model);
         }
     }
 }
