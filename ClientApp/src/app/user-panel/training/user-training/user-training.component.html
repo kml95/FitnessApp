@@ -1,9 +1,111 @@
 <div *ngIf="training">
-    <h1>Cześć, {{training.userName}}. Twoim celem jest {{training.aim}}</h1><br/>
-  
-    <div>
-        <h2>Poniedziałek - klatka piersiowa</h2><hr/>
-        <div *ngFor="let exercise of model.chest">
-          <p>1. {{exercise}}</p>  
-        </div><br/>
-    </div>
+  <!-- <h1>Cześć, {{training.userName}}. Twoim celem jest {{training.aim}}</h1><br /> -->
+  <br />
+  <div *ngIf="training.days === 3">
+    <h2>Poniedziałek - klatka piersiowa, triceps, brzuch</h2>
+    <hr />
+    <h4>Biceps</h4><br />
+    <div *ngFor="let exercise of model.chest">
+      <p>{{exercise}}</p>
+    </div><br />
+    <h4>Triceps</h4><br />
+    <div *ngFor="let exercise of model.triceps">
+      <p>{{exercise}}</p>
+    </div><br />
+    <h4>Brzuch</h4><br />
+    <div *ngFor="let exercise of model.abs">
+      <p>{{exercise}}</p>
+    </div><br /><br />
+    <h2>Środa - plecy, biceps</h2>
+    <hr />
+    <h4>Plecy</h4><br />
+    <div *ngFor="let exercise of model.back">
+      <p>{{exercise}}</p>
+    </div><br />
+    <h4>Biceps</h4><br />
+    <div *ngFor="let exercise of model.biceps">
+      <p>{{exercise}}</p>
+    </div><br /><br />
+    <h2>Piątek - nogi, barki</h2>
+    <hr />
+    <h4>Nogi</h4><br />
+    <div *ngFor="let exercise of model.legs">
+      <p>{{exercise}}</p>
+    </div><br />
+    <h4>Barki</h4><br />
+    <div *ngFor="let exercise of model.shoulders">
+      <p>{{exercise}}</p>
+    </div><br />
+  </div>
+
+  <div *ngIf="training.days === 4">
+    <h2>Poniedziałek - plecy, brzuch</h2>
+    <hr />
+    <h4>Plecy</h4><br />
+    <div *ngFor="let exercise of model.back">
+      <p>{{exercise}}</p>
+    </div><br />
+    <h4>Brzuch</h4><br />
+    <div *ngFor="let exercise of model.abs">
+      <p>{{exercise}}</p>
+    </div><br /><br />
+    <h2>Wtorek - klatka piersiowa, triceps</h2>
+    <hr />
+    <h4>Klatka piersiowa</h4><br />
+    <div *ngFor="let exercise of model.chest">
+      <p>{{exercise}}</p>
+    </div><br />
+    <h4>Triceps</h4><br />
+    <div *ngFor="let exercise of model.triceps">
+      <p>{{exercise}}</p>
+    </div><br /><br />
+    <h2>Czwartek - Nogi</h2>
+    <hr />
+    <div *ngFor="let exercise of model.legs">
+      <p>{{exercise}}</p>
+    </div><br /><br />
+    <h2>Piątek - barki, biceps</h2>
+    <hr />
+    <h4>Barki</h4><br />
+    <div *ngFor="let exercise of model.shoulders">
+      <p>{{exercise}}</p>
+    </div><br />
+    <h4>Biceps</h4><br />
+    <div *ngFor="let exercise of model.biceps">
+      <p>{{exercise}}</p>
+    </div><br />
+  </div>
+
+  <div *ngIf="training.days === 5">
+    <h2>Poniedziałek - klatka piersiowa</h2>
+    <hr />
+    <div *ngFor="let exercise of model.chest">
+      <p>{{exercise}}</p>
+    </div><br /><br />
+    <h2>Wtorek - plecy</h2>
+    <hr />
+    <div *ngFor="let exercise of model.back">
+      <p>{{exercise}}</p>
+    </div><br /><br />
+    <h2>Czwartek - biceps, tricpes</h2>
+    <hr />
+    <h4>Biceps</h4><br />
+    <div *ngFor="let exercise of model.biceps">
+      <p>{{exercise}}</p>
+    </div><br />
+    <h4>Triceps</h4><br />
+    <div *ngFor="let exercise of model.triceps">
+      <p>{{exercise}}</p>
+    </div><br /><br />
+    <h2>Piątek - barki</h2>
+    <hr />
+    <div *ngFor="let exercise of model.shoulders">
+      <p>{{exercise}}</p>
+    </div><br /><br />
+    <h2>Sobota - nogi</h2>
+    <hr />
+    <div *ngFor="let exercise of model.legs">
+      <p>{{exercise}}</p>
+    </div><br />
+  </div>
+</div>

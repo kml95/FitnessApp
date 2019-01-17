@@ -1,8 +1,7 @@
 <div *ngIf="diet">
-  <h1>Cześć, {{diet.userName}}. Twoim celem jest {{diet.dietName}}</h1><br />
-  <h2>Twoje dzienne zapotrzebowanie to: {{diet.calories}}kcal.</h2><br />
-
-
+  <!-- <h1>Cześć, {{diet.userName}}. Twoim celem jest {{diet.dietName}}</h1><br /> -->
+  <!-- <h2>Twoje dzienne zapotrzebowanie to: {{diet.calories}}kcal.</h2><br /> -->
+  <br/>
   <div class="meals row" *ngFor="let item of model">
     <div class="col-md-12">
       <h2>{{item.type}}</h2>
@@ -21,6 +20,3 @@
       <br /><br />
     </div>
   </div>
-
-
-  document.getElementById('image_id').src=vara;

@@ -44,7 +44,7 @@ export class UserService extends BaseService {
   login(userName, password): Observable<any> {
     return this.http.post<any>(this.baseUrl + '/auth/login', JSON.stringify({ userName, password }), this.httpOptions).pipe(
       map(res => {
-        localStorage.setItem('auth_token', res.auth_token);
+        localStorage.setItem('auth_token', res.Auth_token);
         this.loggedIn = true;
         this._authNavStatusSource.next(true);
         return true;

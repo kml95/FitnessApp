@@ -1,0 +1,28 @@
+.center {
+    height: 100%;
+  }
+
+  .calculators-center {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding-top: 40px;
+    padding-bottom: 40px;
+
+    .row{
+        width: 100%;
+    }
+
+    p {
+        text-align: justify;
+    }
+}
+
+.card {
+    height: 280px;
+    width: 380px;
+    img {
+        height: 278px;
+        width: 378px; 
+    }
+}

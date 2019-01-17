@@ -9,6 +9,7 @@ namespace FitnessApp.Controllers
 {
     [Authorize]
     [Route("api/[controller]")]
+    [ApiController]
     public class DietsController : ControllerBase
     {
         private readonly IDietRepository dietRepository;

@@ -6,6 +6,7 @@ using FitnessApp.Data;
 using FitnessApp.Helpers;
 using FitnessApp.Models.Entities;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,10 +17,21 @@ namespace FitnessApp.Controllers
     public class SampleDataController : ControllerBase
     {
         private readonly ApplicationDbContext appDbContext;
+        private readonly UserManager<AppUser> userManager;
+        private readonly RoleManager<IdentityRole> roleManager;
 
-        public SampleDataController(ApplicationDbContext appDbContext)
+        public SampleDataController(ApplicationDbContext appDbContext, UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             this.appDbContext = appDbContext;
+            this.userManager = userManager;
+            this.roleManager = roleManager;
+        }
+
+        [HttpPost]
+        public IActionResult AddAdmin()
+        {
+
+            return Ok();
         }
 
         [HttpGet("carbohydrates")]

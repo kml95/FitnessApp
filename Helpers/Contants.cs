@@ -16,7 +16,8 @@ namespace FitnessApp.Helpers
 
             public static class JwtClaims
             {
-                public const string ApiAccess = "api_access";
+                public const string User = "User";
+                public const string Admin = "Admin";
             }
         }
     }

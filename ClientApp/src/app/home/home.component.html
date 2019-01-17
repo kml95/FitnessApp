@@ -1,10 +1,189 @@
 <main role="main">
-  <!-- Main jumbotron for a primary marketing message or call to action -->
-  <div class="jumbotron">
-    <div class="container">
-      <h1 class="display-3">JWT Auth Demo</h1>
-      <p>This demo shows local and facebook user registration and login flow using Angular v5.2.1, ASP.NET Core 2.0 WebApi and Facebook api</p>
-      <p><a class="btn btn-primary btn-lg" href="#" role="button" routerLink="/register">Signup with email</a> <a class="btn btn-primary btn-lg" href="#" role="button" routerLink="/login">Login with email</a> <a class="btn btn-primary btn-lg" href="#" role="button" routerLink="/facebook-login">Signup/login with facebook</a></p>       
+  <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+      <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="/src//assets/carousel1.jpg" class="d-block w-100" alt="...">
+        <div class="carousel-caption d-none d-md-block">
+          <h2>Diety</h2>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="/src/assets/carousel2.jpeg" class="d-block w-100" alt="...">
+        <div class="carousel-caption d-none d-md-block">
+          <h2>Treningi</h2>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="/src/assets/carousel3.png" style="background:rgba(0, 0, 0, 0.5)" class="d-block w-100" alt="...">
+        <div class="carousel-caption d-none d-md-block">
+          <h2>Kalkulatory</h2>
+        </div>
+      </div>
     </div>
+    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
   </div>
+
+  <div class="container marketing">
+
+    <!-- Three columns of text below the carousel -->
+    <div class="row">
+      <div class="col-lg-4">
+        <!-- <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 140x140"><title>Placeholder</title><rect fill="#777" width="100%" height="100%"></rect><text fill="#777" dy=".3em" x="50%" y="50%">140x140</text></svg> -->
+        <img src="/src/assets/logo1.jpg" class="rounded-circle" style="width: 140px; height: 140px;" alt="...">
+        <h2>Profesjonalne diety</h2>
+        <p>Dzięki pomocy doświadczonych profesjonalistów z wieloletnim doświadczeniem zawodowym aplikacja oferuje
+          tworzenie profesjonalnych, uwzględniających każdy szczegół podany przez użytkownika diet treningowych.</p>
+        <p><a class="btn btn-secondary" href="#" role="button">Zobacz szczegóły »</a></p>
+      </div><!-- /.col-lg-4 -->
+      <div class="col-lg-4">
+        <img src="/src/assets/logo2.jpg" class="rounded-circle" style="width: 140px; height: 140px;" alt="...">
+
+        <!-- <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 140x140"><title>Placeholder</title><rect fill="#777" width="100%" height="100%"></rect><text fill="#777" dy=".3em" x="50%" y="50%">140x140</text></svg> -->
+        <h2>Przemyślane treningi</h2>
+        <p>Dzięki pomocy doświadczonych profesjonalistów z wieloletnim doświadczeniem zawodowym aplikacja oferuje
+          tworzenie profesjonalnych, uwzględniających każdy szczegół podany przez użytkownika planów treningowych.</p>
+        <p><a class="btn btn-secondary" href="#" role="button">Zobacz szczegóły »</a></p>
+      </div><!-- /.col-lg-4 -->
+      <div class="col-lg-4">
+        <img src="/src/assets/logo3.ico" class="rounded-circle" style="width: 140px; height: 140px;" alt="...">
+
+        <!-- <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 140x140"><title>Placeholder</title><rect fill="#777" width="100%" height="100%"></rect><text fill="#777" dy=".3em" x="50%" y="50%">140x140</text></svg> -->
+        <h2>Dokładne kalkulatory</h2>
+        <p>Dzięki pomocy doświadczonych profesjonalistów z wieloletnim doświadczeniem zawodowym aplikacja oferuje
+          szeroki zestaw różnego rodzaju profesjonalnych kalkulatorów, które pomogą Tobie dowiedzieć się więcej o
+          sobie.</p>
+        <p><a class="btn btn-secondary" href="#" role="button">Zobacz szczegóły »</a></p>
+      </div><!-- /.col-lg-4 -->
+    </div><!-- /.row -->
+
+
+    <!-- START THE FEATURETTES -->
+
+    <hr class="featurette-divider">
+
+    <div class="row featurette">
+      <div class="col-md-7">
+        <h2 class="featurette-heading" style="margin-bottom:1rem">Nowoczesne plany dietetyczne. <span class="text-muted">To
+            rozwije Twoje jakiekolwiek wątpliwości.</span></h2>
+        <p class="lead">Myślisz, żeby osiągnąć idealną sylwetkę, musisz stosować restrekcyjne, drogie do wykupienia
+          plany dietetyczne. Nic bardziej mylnego, <b>wypróbuj już teraz!!</b></p>
+      </div>
+      <div class="col-md-5">
+        <img src="/src/assets/food1.jpeg" class="img-fluid mx-auto" style="width: 500px; height: 500px;" alt="...">
+
+        <!-- <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 500x500"><title>Placeholder</title><rect fill="#eee" width="100%" height="100%"></rect><text fill="#aaa" dy=".3em" x="50%" y="50%">500x500</text></svg> -->
+      </div>
+    </div>
+
+    <hr class="featurette-divider">
+
+    <div class="row featurette">
+      <div class="col-md-7 order-md-2">
+        <h2 class="featurette-heading">O taak, to jest to. <span class="text-muted">Indywidualne plany treningowe.</span></h2>
+        <p class="lead">Chodziłeś na siłownię, ale nie miałeś kompletnie pomysłu w jakis sposób trenować, aby
+          przynosiły oczekiwane rezultaty? To bardzo dobrze się składa, bo tutaj dostaniesz odpowiedź. <b>Dołącz do nas
+            już teraz!!</b> </p>
+      </div>
+      <div class="col-md-5 order-md-1">
+        <img src="/src/assets/athletics.jpg" class="img-fluid mx-auto" style="width: 500px; height: 500px;" alt="...">
+
+        <!-- <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 500x500"><title>Placeholder</title><rect fill="#eee" width="100%" height="100%"></rect><text fill="#aaa" dy=".3em" x="50%" y="50%">500x500</text></svg> -->
+      </div>
+    </div>
+
+    <hr class="featurette-divider">
+
+    <div class="row featurette">
+      <div class="col-md-7">
+        <h2 class="featurette-heading">No i w końcu. <span class="text-muted">Dokładne kalkulatory.</span></h2>
+        <p class="lead">Nie mogłeś nigdzie znaleźć odpowiednich, nowoczesnych narzędzi do obliczenia np. swoje
+          dziennnego zapotrzebowania kalorycznego? To świetnie trafiłeś, <b>zarejestruj się już teraz</b> i korzystaj
+          ile chcesz!!</p>
+      </div>
+      <div class="col-md-5">
+        <img src="/src/assets/board.jpg" class="img-fluid mx-auto" style="width: 500px; height: 500px;" alt="...">
+
+        <!-- <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 500x500"><title>Placeholder</title><rect fill="#eee" width="100%" height="100%"></rect><text fill="#aaa" dy=".3em" x="50%" y="50%">500x500</text></svg> -->
+      </div>
+    </div>
+
+    <!-- <hr class="featurette-divider"> -->
+
+    <!-- /END THE FEATURETTES -->
+
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <h5><i class="fa fa-road" style="margin-right: 0.5rem"></i>Train Smart</h5>
+          <hr>
+          <div class="row">
+
+            <p style="text-align:justify">Specjalizujemy sie w generowaniu planów dietetycznych, treningowych oraz udostępniemy użytkownikom
+              rożnego rodzaju kalkulatory.</p>
+            <!-- <ul class="list-unstyled">
+                <li><a href="">Product</a></li>
+                <li><a href="">Benefits</a></li>
+                <li><a href="">Partners</a></li>
+                <li><a href="">Team</a></li>
+              </ul> -->
+          </div>
+          <br>
+        </div>
+        <div class="col-md-4">
+
+        </div>
+        <div class="col-md-4">
+          <h5>Contact</h5>
+          <hr style="width:60px">
+          <div class="contact">
+            <i class="fas fa-home"></i>
+            <p>Warszawa</p><br />
+
+            <i class="fas fa-at"></i>
+            <p>admin@gmail.com</p><br />
+
+            <i class="fas fa-phone"></i>
+            <p>+48 232 323 283</p><br />
+
+            <i class="fas fa-fax"></i>
+            <p>+01 232 123 23</p><br />
+          </div>
+        </div>
+        <!-- <div class="col-md-5">
+          <form>
+            <fieldset class="form-group">
+              <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+            </fieldset>
+            <fieldset class="form-group">
+              <textarea class="form-control" id="exampleMessage" placeholder="Message"></textarea>
+            </fieldset>
+            <fieldset class="form-group text-xs-right">
+              <button type="button" class="btn btn-secondary-outline btn-lg">Send</button>
+            </fieldset>
+          </form>
+        </div> -->
+      </div>
+    </div>
+    <div class="footer-copyright text-center py-3">© 2018-2019 Copyright: Kamil Oleksy
+    </div>
+  </footer>
+  <!-- <footer class="container">
+    <p class="float-right"><a href="#">Back to top</a></p>
+    <p>© 2018-2019 Company, Inc. · <a href="#">Privacy</a> · <a href="#">Terms</a></p>
+  </footer> -->
 </main>

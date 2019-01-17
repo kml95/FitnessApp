@@ -1,3 +1,133 @@
-<p>
-  create-training works!
-</p>
+<h1 class="h2 font-weight-normal" [hidden]="!showMainPage" style="text-align:center; padding-top:88px">Jaki jest twój
+  cel?</h1>
+<div class="container-fluid" [hidden]="!showMainPage">
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card img-fluid">
+        <img class="card-img-top" src="/assets/reduction.jpeg" alt="Card image">
+        <div class="card-img-overlay">
+          <h4 class="card-title text-white"><b>Zwiększ masę mięśniową</b></h4>
+          <div class="text-center">
+            <button class="btn btn-primary" (click)="showTrainingForm = true; showMainPage = false; model.trainingAim = 0">Wybierz</button>
+          </div><br />
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card img-fluid">
+        <img class="card-img-top" src="/assets/girl.jpg" alt="Card image">
+        <div class="card-img-overlay">
+          <h4 class="card-title text-white"><b>Wyrzeźb mięśnie</b></h4>
+          <div class="text-center">
+            <button class="btn btn-primary" (click)="showTrainingForm = true; showMainPage = false; model.trainingAim = 1;">Wybierz</button>
+          </div><br />
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card img-fluid">
+        <img class="card-img-top" src="/assets/strength.jpg" alt="Card image">
+        <div class="card-img-overlay">
+          <h4 class="card-title text-white"><b>Zwiększ siłę</b></h4>
+          <div class="text-center">
+            <button class="btn btn-primary" (click)="showTrainingForm = true; showMainPage = false; model.trainingAim = 2;">Wybierz</button>
+          </div><br />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div [hidden]="!showTrainingForm" class="training-center">
+  <div class="row">
+    <div class="col-md-4" *ngIf="model.trainingAim === 0">
+      <h3>Trening na wzrost mięśni</h3><br />
+      <p>Jest to oferta skierowana dla tych, którzy chcą zwiększyć obwody swoich mięsni oraz
+        jednocześnie stać się silniejsi fizycznie.
+      </p><br />
+      <div class="card img-fluid">
+        <img class="card-img-top" src="/assets/reduction.jpeg" alt="Card image">
+      </div>
+    </div>
+    <div class="col-md-4" *ngIf="model.trainingAim === 1">
+      <h3>Trening na rzeźbę</h3><br />
+      <p>Jest to oferta skierowana dla tych, którzy chcą pozbyć się zbędnego tłuszczu w organiźmie,
+        przez co uzyskąć uzyskać wymarzoną sylwetkę.
+      </p><br />
+      <div class="card img-fluid">
+        <img class="card-img-top" src="/assets/girl.jpg" alt="Card image">
+      </div>
+    </div>
+    <div class="col-md-4" *ngIf="model.trainingAim === 2">
+      <h3>Trening na wzrost siły</h3><br />
+      <p>Jest to oferta skierowana dla tych, których celem jest w jak najkrótszym czasie maksymalizacjia
+        wzrostu siły wszystkich partii mięsniowych.
+      </p><br />
+      <div class="card img-fluid">
+        <img class="card-img-top" src="/assets/strength.jpg" alt="Card image">
+      </div>
+    </div>
+    <div class="col-md-8" style="display:flex">
+      <form class="form-createDiet training" #f="ngForm" novalidate (ngSubmit)="onSubmit()">
+        <h1 class="h3 mb-3 font-weight-normal">Wprowadź swoje dane</h1><br />
+
+        <label style="margin-right : 1rem">Płeć:</label>
+
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="male" id="male" value="male" [(ngModel)]="model.sex">
+          <label class="form-check-label" for="male">Mężczyzna</label>
+        </div>
+        <div class="form-check form-check-inline margin-bottom">
+          <input class="form-check-input" type="radio" name="female" id="female" value="female" [(ngModel)]="model.sex">
+          <label class="form-check-label" for="female">Kobieta</label>
+        </div><br />
+
+
+        <!-- <label for="inputFirstName" class="sr-only">Waga</label>
+        <input type="text" class="form-control" id="inputFirstName" placeholder="Waga" name="firstName" required=""
+          autofocus="" [(ngModel)]="model.weight"><br />
+        <label for="inputLastName" class="sr-only">Wzrsot</label>
+        <input type="text" class="form-control" id="inputLastName" placeholder="Wzrost" name="lastName" required=""
+          [(ngModel)]="model.height"><br />
+        <label for="inputEmail" class="sr-only">Wiek</label>
+        <input type="text" class="form-control" id="inputEmail" placeholder="Wiek" name="email" required="" [(ngModel)]="model.age"><br /> -->
+
+        <!-- <label style="margin-right : 1rem">Cel:</label>
+        <div class="form-check ">
+          <input class="form-check-input" type="radio" id="mass" name="mass" value=0 [(ngModel)]="model.trainingAim">
+          <label class="form-check-label" for="mass">Wzrost masy mięśniowej</label>
+        </div>
+        <div class="form-check ">
+          <input class="form-check-input" type="radio" id="reduction" name="reduction" value=1 [(ngModel)]="model.trainingAim">
+          <label class="form-check-label" for="reduction">Uzyskanie wyrzeźbionej sylwetki</label>
+        </div>
+        <div class="form-check margin-bottom">
+          <input class="form-check-input" type="radio" id="strength" name="strength" value=2 [(ngModel)]="model.trainingAim">
+          <label class="form-check-label" for="strength">Wzrost siły fizycznej</label>
+        </div> -->
+        
+        <label style="margin-right : 1rem">Ilość treningów tygodniowo:</label>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" id="three" name="three" value=3 [(ngModel)]="model.days">
+          <label class="form-check-label" for="three">3</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" id="four" name="four" value=4 [(ngModel)]="model.days">
+          <label class="form-check-label" for="four">4</label>
+        </div>
+        <div class="form-check margin-bottom">
+          <input class="form-check-input" type="radio" id="five" name="five" value=5 [(ngModel)]="model.days">
+          <label class="form-check-label" for="five">5</label>
+        </div>
+
+        <div class="row">
+          <button class="btn btn-primary" type="submit">Wygeneruj trening</button>
+          <button class="btn btn-primary" style="margin-left: 2%" (click)="showTrainingForm = false; showMainPage = true;">Cofnij</button>
+        </div>
+        <div *ngIf="errors" class="alert alert-danger" role="alert">
+          <strong>Oops!</strong> {{errors}}
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

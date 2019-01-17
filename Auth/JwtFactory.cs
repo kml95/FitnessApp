@@ -1,4 +1,5 @@
 ﻿using FitnessApp.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
@@ -44,13 +45,25 @@ namespace FitnessApp.Auth
             return encodedJwt;
         }
 
-        public ClaimsIdentity GenerateClaimsIdentity(string userName, string id)
+        public ClaimsIdentity GenerateClaimsIdentity(string userName, string id, string userRole)
         {
-            return new ClaimsIdentity(new GenericIdentity(userName, "Token"), new[]
+            if (userRole.Equals("Admin"))
             {
-                new Claim(Helpers.Constants.Strings.JwtClaimIdentifiers.Id, id),
-                new Claim(Helpers.Constants.Strings.JwtClaimIdentifiers.Rol, Helpers.Constants.Strings.JwtClaims.ApiAccess)
-            });
+                return new ClaimsIdentity(new GenericIdentity(userName, "Token"), new[]
+                {
+                    new Claim(Helpers.Constants.Strings.JwtClaimIdentifiers.Id, id),
+                    new Claim(Helpers.Constants.Strings.JwtClaimIdentifiers.Rol, Helpers.Constants.Strings.JwtClaims.Admin)
+                });
+            }
+            else
+            {
+                return new ClaimsIdentity(new GenericIdentity(userName, "Token"), new[]
+                {
+                    new Claim(Helpers.Constants.Strings.JwtClaimIdentifiers.Id, id),
+                    new Claim(Helpers.Constants.Strings.JwtClaimIdentifiers.Rol, Helpers.Constants.Strings.JwtClaims.User)
+                });
+            }
+
         }
 
         /// <returns>Date converted to seconds since Unix epoch (Jan 1, 1970, midnight UTC).</returns>

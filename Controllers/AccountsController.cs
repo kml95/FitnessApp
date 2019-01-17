@@ -37,8 +37,15 @@ namespace FitnessApp.Controllers
 
             var result = await userManager.CreateAsync(userIdentity, model.Password);
 
-            if (!result.Succeeded) return BadRequest(Errors.AddErrorsToModelState(result, ModelState));
-
+            if (!result.Succeeded)
+            {
+                return BadRequest(Errors.AddErrorsToModelState(result, ModelState));
+            }
+            else
+            {
+                var result2 = await userManager.AddToRoleAsync(userIdentity, "User");
+                if (!result2.Succeeded) return BadRequest(Errors.AddErrorsToModelState(result2, ModelState));
+            }
             return Ok();
         }
     }

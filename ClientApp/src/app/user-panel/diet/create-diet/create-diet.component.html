@@ -38,40 +38,46 @@
   </div>
 </div>
 
-<div [hidden]="!showDietForm">
+<div [hidden]="!showDietForm" class="diet-center">
   <div class="row">
     <div class="col-md-4" *ngIf="dietType == 1">
-      <h3>Dieta na wzrost mięśni</h3>
-      <p>Jest to dieta przeznaczona tym, którzy chcą zwiększyć obwody swoich mięsni oraz
-
-      </p>
-      <p>aasdasdasdsad</p>
+      <h3>Dieta na wzrost mięśni</h3><br />
+      <p>Jest to oferta skierowana dla tych, którzy chcą zwiększyć obwody swoich mięsni oraz
+        jednocześnie stać się silniejsi fizycznie.
+      </p><br />
+      <div class="card img-fluid">
+        <img class="card-img-top" src="/assets/food2.jpeg" alt="Card image">
+      </div>
     </div>
     <div class="col-md-4" *ngIf="dietType == 2">
-      <h3>Dieta na wyrzeźbienie mięsni</h3>
-      <p>Jest to dieta przeznaczona tym, którzy chcą poprawić wygląd swoich mięsni oraz
-
-      </p>
-      <p>aasdasdasdsad</p>
+      <h3>Dieta na wyrzeźbienie mięśni</h3><br />
+      <p>Jest to oferta skierowana dla tych, którzy chcą pozbyć się zbędnego tłuszczu w organiźmie,
+         przez co uzyskąć uzyskać wymarzoną sylwetkę.
+      </p><br />
+      <div class="card img-fluid">
+        <img class="card-img-top" src="/assets/food3.jpeg" alt="Card image">
+      </div>
     </div>
     <div class="col-md-4" *ngIf="dietType == 3">
-      <h3>Dieta podtrzymaniowa</h3>
-      <p>Jest to dieta przeznaczona tym, którzy chcą utrzymać swoją obecną formę oraz
-
-      </p>
-      <p>aasdasdasdsad</p>
+      <h3>Dieta na utrzymanie formy</h3><br />
+      <p>Jest to oferta skierowana dla tych, którzy chcą utrzymać swoją obecną formę, czyli cieszyć
+        się już osiągnietą formą jak najdłużej.
+      </p><br />
+      <div class="card img-fluid">
+        <img class="card-img-top" src="/assets/food1.jpeg" alt="Card image">
+      </div>
     </div>
-    <div class="col-md-6">
-      <form class="form-createDiet" #f="ngForm" novalidate (ngSubmit)="onSubmit()">
-        <h1 class="h3 mb-3 font-weight-normal">Wprowadź swoje dane</h1>
+    <div class="col-md-8" style="display:flex">
+      <form class="form-createDiet diet" #f="ngForm" novalidate (ngSubmit)="onSubmit()">
+        <h1 class="h3 mb-3 font-weight-normal">Wprowadź swoje dane</h1><br />
 
-        <label>Płeć</label>
+        <label style="margin-right : 1rem">Płeć</label>
 
         <div class="form-check form-check-inline">
           <input class="form-check-input" type="radio" name="male" id="male" value="male" [(ngModel)]="model.sex">
           <label class="form-check-label" for="male">Mężczyzna</label>
         </div>
-        <div class="form-check form-check-inline">
+        <div class="form-check form-check-inline margin-bottom">
           <input class="form-check-input" type="radio" name="female" id="female" value="female" [(ngModel)]="model.sex">
           <label class="form-check-label" for="female">Kobieta</label>
         </div>
@@ -85,7 +91,7 @@
         <label for="inputEmail" class="sr-only">Wiek</label>
         <input type="text" class="form-control" id="inputEmail" placeholder="Wiek" name="email" required="" [(ngModel)]="model.age"><br />
 
-        <label>Ilość posiłków dziennie</label>
+        <label style="margin-right : 1rem">Ilość posiłków dziennie</label>
         <div class="form-check form-check-inline">
           <input class="form-check-input" type="radio" id="three" name="three" value=3 [(ngModel)]="model.mealsAmount">
           <label class="form-check-label" for="three">3</label>
@@ -94,7 +100,7 @@
           <input class="form-check-input" type="radio" id="four" name="four" value=4 [(ngModel)]="model.mealsAmount">
           <label class="form-check-label" for="four">4</label>
         </div>
-        <div class="form-check form-check-inline">
+        <div class="form-check form-check-inline margin-bottom">
           <input class="form-check-input" type="radio" id="five" name="five" value=5 [(ngModel)]="model.mealsAmount">
           <label class="form-check-label" for="five">5</label>
         </div>

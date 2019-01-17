@@ -51,13 +51,14 @@ namespace FitnessApp.Controllers
 
             // get the user to verifty
             var userToVerify = await userManager.FindByNameAsync(userName);
+            var userRole = await userManager.GetRolesAsync(userToVerify);
 
             if (userToVerify == null) return await Task.FromResult<ClaimsIdentity>(null);
 
             // check the credentials
             if (await userManager.CheckPasswordAsync(userToVerify, password))
             {
-                return await Task.FromResult(jwtFactory.GenerateClaimsIdentity(userName, userToVerify.Id));
+                return await Task.FromResult(jwtFactory.GenerateClaimsIdentity(userName, userToVerify.Id, userRole[0]));
             }
 
             // Credentials are invalid, or account doesn't exist

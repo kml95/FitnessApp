@@ -13,9 +13,10 @@ namespace FitnessApp.Helpers
         {
             var response = new
             {
-                id = identity.Claims.Single(c => c.Type == "id").Value,
-                auth_token = await jwtFactory.GenerateEncodedToken(userName, identity),
-                expires_in = (int)jwtOptions.ValidFor.TotalSeconds
+                Id = identity.Claims.Single(c => c.Type.Equals("id")).Value,
+                Role = identity.Claims.Single(c => c.Type.Equals("rol")).Value, 
+                Auth_token = await jwtFactory.GenerateEncodedToken(userName, identity),
+                Expires_in = (int)jwtOptions.ValidFor.TotalSeconds
             };
 
             return JsonConvert.SerializeObject(response, serializerSettings);

@@ -11,6 +11,7 @@ namespace FitnessApp.Controllers
 {
     [Authorize]
     [Route("api/[controller]")]
+    [ApiController]
     public class TrainingsController : ControllerBase
     {
         private readonly ITrainingRepository trainingRepository;

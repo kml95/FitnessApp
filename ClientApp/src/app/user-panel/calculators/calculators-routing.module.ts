@@ -8,7 +8,7 @@ import { MainComponent } from './main/main.component';
 
 const routes: Routes = [
   {
-    path: 'user-panel/calculators',
+    path: '',
     component: MainComponent,
     children: [
       { path: '', component: HomeComponent},
