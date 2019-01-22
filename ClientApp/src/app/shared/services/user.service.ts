@@ -25,14 +25,20 @@ export class UserService extends BaseService {
   // Observable navItem stream
   authNavStatus$ = this._authNavStatusSource.asObservable();
 
+  private adminNavSource = new BehaviorSubject<boolean>(false);
+  adminNav$ = this.adminNavSource.asObservable();
+
   private loggedIn = false;
+  private isAdmin = false;
 
   constructor(private http: HttpClient, private configService: ConfigService) {
     super();
     this.loggedIn = !!localStorage.getItem('auth_token');
+    this.isAdmin = localStorage.getItem('role') === 'Admin';
     // ?? not sure if this the best way to broadcast the status but seems to resolve issue on page refresh where auth status is lost in
     // header component resulting in authed user nav links disappearing despite the fact user is still logged in
     this._authNavStatusSource.next(this.loggedIn);
+    this.adminNavSource.next(this.isAdmin);
     this.baseUrl = configService.getApiURI();
   }
 
@@ -45,6 +51,12 @@ export class UserService extends BaseService {
     return this.http.post<any>(this.baseUrl + '/auth/login', JSON.stringify({ userName, password }), this.httpOptions).pipe(
       map(res => {
         localStorage.setItem('auth_token', res.Auth_token);
+        localStorage.setItem('role', res.Role);
+        // localStorage.setItem('role', res.Role);
+        if (res.Role === 'Admin') {
+          this.isAdmin = true;
+          this.adminNavSource.next(true);
+        }
         this.loggedIn = true;
         this._authNavStatusSource.next(true);
         return true;
@@ -56,6 +68,8 @@ export class UserService extends BaseService {
   logout() {
     localStorage.removeItem('auth_token');
     this.loggedIn = false;
+    this.isAdmin = false;
+    this.adminNavSource.next(false);
     this._authNavStatusSource.next(false);
   }
 
@@ -63,18 +77,8 @@ export class UserService extends BaseService {
     return this.loggedIn;
   }
 
-  // facebookLogin(accessToken: string) {
-  //   const body = JSON.stringify({ accessToken });
-  //   return this.http
-  //     .post(
-  //       this.baseUrl + '/externalauth/facebook', body, this.httpOptions)
-  //     .map(res => res.json())
-  //     .map(res => {
-  //       localStorage.setItem('auth_token', res.auth_token);
-  //       this.loggedIn = true;
-  //       this._authNavStatusSource.next(true);
-  //       return true;
-  //     })
-  //     .catch(this.handleError);
-  // }
+  isAdminLoggedIn() {
+    return this.isAdmin;
+  }
+
 }

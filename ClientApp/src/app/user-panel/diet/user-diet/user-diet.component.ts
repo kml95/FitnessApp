@@ -101,7 +101,7 @@ export class UserDietComponent implements OnInit {
           console.log('Incorrect numbers of meals. Create a diet failed!');
           break;
       }
-    });
+    }, (error) => this.diet = null);
   }
 }
 

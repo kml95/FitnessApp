@@ -3,10 +3,12 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { HomeComponent } from './home/home.component';
 import { UserPanelModule } from './user-panel/user-panel.module';
+import { AdminModule } from './admin/admin.module';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent},
-  { path: 'user-panel', loadChildren: () => UserPanelModule}
+  { path: 'user-panel', loadChildren: () => UserPanelModule},
+  { path: 'admin', loadChildren: () => AdminModule}
   // { path: 'account', loadChildren: 'account/account.module#AccountModule'},
   // { path: 'user-panel', loadChildren: './user-panel/user-panel.module#UserPanelModule'}
 ];

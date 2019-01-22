@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using static FitnessApp.DAL.DTO.MealsProductsDTO;
 
 namespace FitnessApp.DAL.Repositories
 {
@@ -38,7 +39,7 @@ namespace FitnessApp.DAL.Repositories
                     UserName = d.User.FirstName,
                     Meals = d.MealDiets
                     .Select(md => md.Meal)
-                    .Select(m => new MealsProductsDTO.MealsDTO
+                    .Select(m => new MealsDTO
                     {
                         Name = m.Name,
                         Type = m.Type.ToString(),
@@ -49,6 +50,7 @@ namespace FitnessApp.DAL.Repositories
                 })
                 .FirstOrDefaultAsync();
 
+            if (mealsProducts == null) return null;
             var mealTypes = mealsProducts.Meals.Select(m => m.Type).ToList();
 
             var index = 0;

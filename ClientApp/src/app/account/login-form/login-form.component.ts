@@ -49,7 +49,11 @@ export class LoginFormComponent implements OnInit, OnDestroy {
         .subscribe(
         result => {
           if (result) {
-            this.router.navigate(['/user-panel']);
+            if (this.userService.isAdminLoggedIn()) {
+              this.router.navigate(['/admin']);
+            } else {
+              this.router.navigate(['/user-panel']);
+            }
           }
         },
         error => this.errors = error);

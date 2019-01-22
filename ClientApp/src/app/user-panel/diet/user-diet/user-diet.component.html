@@ -1,6 +1,8 @@
+<div *ngIf="diet === null">
+  <br />
+  <h2>Nie posiadasz aktualnie żadnych diet. <a style="margin-left:1rem; margin-bottom: 0.5rem;" routerLink="stworz" class="btn btn-primary">Stwórz dietę już teraz!</a> </h2>
+</div>
 <div *ngIf="diet">
-  <!-- <h1>Cześć, {{diet.userName}}. Twoim celem jest {{diet.dietName}}</h1><br /> -->
-  <!-- <h2>Twoje dzienne zapotrzebowanie to: {{diet.calories}}kcal.</h2><br /> -->
   <br/>
   <div class="meals row" *ngFor="let item of model">
     <div class="col-md-12">

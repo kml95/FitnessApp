@@ -9,8 +9,6 @@ namespace FitnessApp.Models.Entities
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        //public int Sets { get; set; }
-        //public int Reps { get; set; }
         public int Stage { get; set; }
         public Muscle Muscle { get; set; }
 
