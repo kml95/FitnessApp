@@ -47,6 +47,8 @@ namespace FitnessApp
             services.AddSingleton<IJwtFactory, JwtFactory>();
             services.AddScoped<IDietRepository, DietRepository>();
             services.AddScoped<ITrainingRepository, TrainingRepository>();
+            services.AddScoped<IExerciseRepository, ExerciseRepository>();
+            services.AddScoped<IProductRepository, ProductRepository>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 

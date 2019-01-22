@@ -2,11 +2,8 @@
 using FitnessApp.DAL.Repositories.Abstracts;
 using FitnessApp.Data;
 using FitnessApp.Models.Entities;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
-using System;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace FitnessApp.DAL.Repositories
@@ -14,34 +11,64 @@ namespace FitnessApp.DAL.Repositories
     public class ProductRepository : IProductRepository
     {
         private readonly ApplicationDbContext appDbContext;
-        private readonly UserManager<AppUser> userManager;
-        private readonly IHttpContextAccessor httpContextAccessor;
 
-        public ProductRepository(ApplicationDbContext appContext, UserManager<AppUser> userManager, IHttpContextAccessor httpContextAccessor)
+        public ProductRepository(ApplicationDbContext appContext)
         {
             this.appDbContext = appContext;
-            this.userManager = userManager;
-            this.httpContextAccessor = httpContextAccessor;
         }
 
-        public Task<int> Create(ProductDTO model)
+        public async Task<IEnumerable<Product>> GetAsync()
         {
-            throw new NotImplementedException();
+            return await appDbContext.Products.AsNoTracking().ToListAsync();
         }
 
-        public Task<int> Delete(int id)
+        public async Task<Product> CreateAsync(ProductDTO product)
         {
-            throw new NotImplementedException();
+            var newProduct = new Product
+            {
+                Name = product.Name,
+                Calories = product.Calories,
+                Carbohydrates = product.Carbohydrates,
+                Protein = product.Protein,
+                Fat = product.Fat,
+                Category = product.Category
+            };
+
+            appDbContext.Products.Add(newProduct);
+            await appDbContext.SaveChangesAsync();
+
+            return newProduct;
         }
 
-        public Task<ProductDTO> Get()
+        public async Task<bool> UpdateAsync(int id, ProductDTO product)
         {
-            throw new NotImplementedException();
+            var productToUpdate = await appDbContext.Products.FindAsync(id);
+
+            if (productToUpdate == null) return false;
+
+            productToUpdate.Name = product.Name;
+            productToUpdate.Calories = product.Calories;
+            productToUpdate.Carbohydrates = product.Carbohydrates;
+            productToUpdate.Protein = product.Protein;
+            productToUpdate.Fat = product.Fat;
+            productToUpdate.Category = product.Category;
+
+            appDbContext.Entry(productToUpdate).State = EntityState.Modified;
+            await appDbContext.SaveChangesAsync();
+
+            return true;
         }
 
-        public Task<int> Update(int id)
+        public async Task<Product> DeleteAsync(int id)
         {
-            throw new NotImplementedException();
+            var product = await appDbContext.Products.FindAsync(id);
+
+            if (product == null) return null;
+
+            appDbContext.Products.Remove(product);
+            await appDbContext.SaveChangesAsync();
+
+            return product;
         }
     }
 }

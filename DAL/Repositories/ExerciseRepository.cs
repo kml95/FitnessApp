@@ -2,11 +2,8 @@
 using FitnessApp.DAL.Repositories.Abstracts;
 using FitnessApp.Data;
 using FitnessApp.Models.Entities;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
-using System;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace FitnessApp.DAL.Repositories
@@ -14,48 +11,58 @@ namespace FitnessApp.DAL.Repositories
     public class ExerciseRepository : IExerciseRepository
     {
         private readonly ApplicationDbContext appDbContext;
-        private readonly UserManager<AppUser> userManager;
-        private readonly IHttpContextAccessor httpContextAccessor;
 
-        public ExerciseRepository(ApplicationDbContext appContext, UserManager<AppUser> userManager, IHttpContextAccessor httpContextAccessor)
+        public ExerciseRepository(ApplicationDbContext appContext)
         {
             this.appDbContext = appContext;
-            this.userManager = userManager;
-            this.httpContextAccessor = httpContextAccessor;
         }
 
-        public Task<ExerciseDTO> Get()
+        public async Task<IEnumerable<Exercise>> GetAsync()
         {
-            throw new NotImplementedException();
+            return await appDbContext.Exercises.AsNoTracking().ToListAsync();
         }
 
-        public async Task<int> Create(ExerciseDTO model)
+        public async Task<Exercise> CreateAsync(ExerciseDTO exercise)
         {
             var newExercise = new Exercise
             {
-                Name = model.Name,
-                Stage = model.Stage,
-                Muscle = model.Muscle
+                Name = exercise.Name,
+                Stage = exercise.Stage,
+                Muscle = exercise.Muscle
             };
 
             appDbContext.Exercises.Add(newExercise);
             await appDbContext.SaveChangesAsync();
 
-            return newExercise.Id;
+            return newExercise;
         }
 
-        public Task<int> Update(int id)
+        public async Task<bool> UpdateAsync(int id, ExerciseDTO exercise)
         {
-            throw new NotImplementedException();
+            var exerciseToUpdate = await appDbContext.Exercises.FindAsync(id);
+
+            if (exerciseToUpdate == null) return false;
+
+            exerciseToUpdate.Name = exercise.Name;
+            exerciseToUpdate.Stage = exercise.Stage;
+            exerciseToUpdate.Muscle = exercise.Muscle;
+
+            appDbContext.Entry(exerciseToUpdate).State = EntityState.Modified;
+            await appDbContext.SaveChangesAsync();
+
+            return true;
         }
 
-        public Task<int> Delete(int id)
+        public async Task<Exercise> DeleteAsync(int id)
         {
-            throw new NotImplementedException();
+            var exercise = await appDbContext.Exercises.FindAsync(id);
+
+            if (exercise == null) return null;
+
+            appDbContext.Exercises.Remove(exercise);
+            await appDbContext.SaveChangesAsync();
+
+            return exercise;
         }
-
-        
-
-        
     }
 }

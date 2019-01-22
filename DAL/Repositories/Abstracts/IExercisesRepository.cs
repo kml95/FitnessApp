@@ -1,15 +1,15 @@
 ﻿using FitnessApp.DAL.DTO;
 using FitnessApp.Models.Entities;
-using FitnessApp.ViewModels;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace FitnessApp.DAL.Repositories.Abstracts
 {
     public interface IExerciseRepository
     {
-        Task<ExerciseDTO> Get();
-        Task<int> Create(ExerciseDTO model);
-        Task<int> Delete(int id);
-        Task<int> Update(int id);
+        Task<IEnumerable<Exercise>> GetAsync();
+        Task<Exercise> CreateAsync(ExerciseDTO exercise);
+        Task<Exercise> DeleteAsync(int id);
+        Task<bool> UpdateAsync(int id, ExerciseDTO exercise);
     }
 }

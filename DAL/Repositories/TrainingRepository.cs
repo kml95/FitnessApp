@@ -215,7 +215,7 @@ namespace FitnessApp.DAL.Repositories
                     UserName = t.User.FirstName,
                     Exercises = t.ExerciseTrainings
                     .Select(et => et.Exercise)
-                    .Select(e => new ExerciseDTO
+                    .Select(e => new TrainingDTO.ExerciseDTO
                     {
                         Name = e.Name,
                         Stage = e.Stage,
