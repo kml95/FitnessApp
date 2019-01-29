@@ -8,7 +8,8 @@ const routes: Routes = [
     path: '',
     component: UserTrainingComponent,
   },
-  { path: 'stworz', component: CreateTrainingComponent}
+  { path: 'stworz', component: CreateTrainingComponent},
+  { path: 'historia', component: CreateTrainingComponent}
 ];
 
 @NgModule({

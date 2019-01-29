@@ -1,0 +1,33 @@
+nav {
+    float: right;
+    margin-right: 1rem;
+    margin-bottom: 0.5rem;
+    a {
+        color: #007bff;
+    }
+}
+
+table {
+    margin-top: 2rem;
+}
+
+.container {
+    .row {
+        display: inline;
+    
+        h3 {
+            float: right;
+            position: relative;
+            left: -50%;
+            font-style: italic;
+        }
+        
+        button {
+            float: right;
+            position: relative;
+            left: +11.5%;
+            padding-right: 15px;
+            margin-bottom: 0.5rem;
+        }
+    }
+}

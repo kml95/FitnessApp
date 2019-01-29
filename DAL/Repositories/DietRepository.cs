@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using static FitnessApp.DAL.DTO.MealsProductsDTO;
@@ -80,6 +81,22 @@ namespace FitnessApp.DAL.Repositories
                 index++;
             }
             return mealsProducts;
+        }
+
+        public async Task<IEnumerable<DietAnalysisDTO>> GetAllAsync()
+        {
+            return await appDbContext
+               .Diets
+               .AsNoTracking()
+               .Where(d => d.UserId.Equals(httpContextAccessor.HttpContext.User.FindFirst(Constants.Strings.JwtClaimIdentifiers.Id).Value))
+               .OrderBy(d => d.Created)
+               .Select(d => new DietAnalysisDTO
+               {
+                   Created = d.Created,
+                   Calories = d.Calories,
+                   Meals = d.Meals
+               })
+               .ToListAsync();
         }
 
         public async Task<int> Create(DietViewModel model)
@@ -161,5 +178,7 @@ namespace FitnessApp.DAL.Repositories
 
             return newDiet.Id;
         }
+
+        
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using FitnessApp.DAL.DTO;
 using FitnessApp.DAL.Repositories.Abstracts;
 using FitnessApp.ViewModels;
@@ -29,6 +30,18 @@ namespace FitnessApp.Controllers
             if (model == null) return NotFound();
 
             return model;
+        }
+
+        [HttpGet]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(404)]
+        public async Task<ActionResult<IEnumerable<DietAnalysisDTO>>> GetAll()
+        {
+            List<DietAnalysisDTO> diets = (List<DietAnalysisDTO>) await dietRepository.GetAllAsync();
+
+            if (diets == null) return NotFound();
+
+            return diets;
         }
 
         [HttpPost("[action]")]

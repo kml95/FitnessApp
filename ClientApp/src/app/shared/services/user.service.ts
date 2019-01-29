@@ -9,6 +9,7 @@ import { BaseService } from './base.service';
 import { Observable, BehaviorSubject } from 'rxjs';
 
 import { catchError, debounceTime, distinctUntilChanged, map, switchMap } from 'rxjs/operators';
+import { User } from '../models/user.interface';
 
 @Injectable()
 
@@ -42,9 +43,45 @@ export class UserService extends BaseService {
     this.baseUrl = configService.getApiURI();
   }
 
-  register(email: string, password: string, firstName: string, lastName: string): Observable<Response> {
+  get(): Observable<User[]> {
+    const authToken = localStorage.getItem('auth_token');
+    const headers = new HttpHeaders().set('Authorization', 'Bearer ' + authToken);
+    return this.http.get<User[]>(`${this.baseUrl}/accounts`, {headers});
+  }
+
+  getRange(index: number, count: number): Observable<User[]> {
+    const authToken = localStorage.getItem('auth_token');
+    const headers = new HttpHeaders().set('Authorization', 'Bearer ' + authToken);
+    return this.http.get<User[]>(`${this.baseUrl}/accounts/getRange?skip=${index}&take=${count}`, {headers});
+  }
+
+  getIdByUserName(userName: string): Observable<UserId> {
+    const authToken = localStorage.getItem('auth_token');
+    const headers = new HttpHeaders().set('Authorization', 'Bearer ' + authToken);
+    return this.http.get<UserId>(`${this.baseUrl}/accounts/getIdByUserName?name=${userName}`, {headers});
+  }
+
+  count(): Observable<number> {
+    const authToken = localStorage.getItem('auth_token');
+    const headers = new HttpHeaders().set('Authorization', 'Bearer ' + authToken);
+    return this.http.get<number>(`${this.baseUrl}/accounts/count`, {headers});
+  }
+
+  delete(id: string): Observable<User> {
+    const authToken = localStorage.getItem('auth_token');
+    const headers = new HttpHeaders().set('Authorization', 'Bearer ' + authToken);
+    return this.http.delete<User>(`${this.baseUrl}/accounts?id=${id}`, {headers});
+  }
+
+  update(id: string, user: User): Observable<Response> {
+    const authToken = localStorage.getItem('auth_token');
+    const headers = new HttpHeaders().set('Authorization', 'Bearer ' + authToken);
+    return this.http.put<Response>(`${this.baseUrl}/accounts/update?id=${id}`, user, {headers});
+  }
+
+  register(email: string, password: string, firstName: string, lastName: string): Observable<User> {
     const body = { email, password, firstName, lastName };
-    return this.http.post<Response>(`${this.baseUrl}/accounts/register`, body);
+    return this.http.post<User>(`${this.baseUrl}/accounts/register`, body);
   }
 
   login(userName, password): Observable<any> {
@@ -81,4 +118,9 @@ export class UserService extends BaseService {
     return this.isAdmin;
   }
 
+}
+
+
+interface UserId {
+  id: string;
 }

@@ -1,3 +1,188 @@
-<p>
-  users works!
-</p>
+<div *ngIf="users">
+  <br />
+  <div class="container">
+    <div class="row">
+      <h3>Użytkownicy</h3>
+      <button class="btn btn-success" (click)="createAlert = false;" type="button" data-toggle="modal" data-target="#createModal"><i
+          class="fas fa-plus"></i>
+        Dodaj</button>
+    </div>
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Imię</th>
+          <th scope="col">Nazwisko</th>
+          <th scope="col">Login</th>
+          <th scope="col">E-mail</th>
+          <th scope="col">Akcje</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users; let i = index">
+          <th scope="row">{{(currentPage - 1) * 7 + (i + 1)}}</th>
+          <td>{{user.firstName}}</td>
+          <td>{{user.lastName}}</td>
+          <td>{{user.userName}}</td>
+          <td>{{user.email}}</td>
+          <td>
+            <button class="btn btn-primary" (click)="initEditForm(editForm, user); editedAlert = false;" data-toggle="modal"
+              data-target="#editModal"><i class="far fa-edit"></i></button>
+            <button class="btn btn-danger" style="margin-left:1rem" (click)="deleteUser(user.userName)"><i class="fas fa-trash"></i></button>
+          </td>
+        </tr>
+      </tbody>
+    </table><br />
+
+    <nav aria-label="Pagination">
+      <ul class="pagination">
+        <li class="page-item" [ngClass]="{'disabled': currentPage === 1}">
+          <a class="page-link" (click)="getUsers(currentPage - 1)">Previous</a>
+        </li>
+        <li class="page-item" [ngClass]="{'active': index === currentPage}">
+          <a *ngIf="index !== currentPage; else elseTemplate" class="page-link " (click)="getUsers(index)">{{index}}</a>
+          <ng-template #elseTemplate>
+            <span class="page-link">
+              {{index}}
+              <span class="sr-only">(current)</span>
+            </span>
+          </ng-template>
+        </li>
+        <li class="page-item" *ngIf="pages >= 2" [ngClass]="{'active': index + 1 === currentPage}">
+          <a *ngIf="index + 1 !== currentPage; else elseTemplate2" class="page-link " (click)="getUsers(index + 1)">{{index
+            + 1}}</a>
+          <ng-template #elseTemplate2>
+            <span class="page-link">
+              {{index + 1}}
+              <span class="sr-only">(current)</span>
+            </span>
+          </ng-template>
+        </li>
+        <li class="page-item" *ngIf="pages >= 3" [ngClass]="{'active': index + 2 === currentPage}">
+          <a *ngIf="index + 2 !== currentPage; else elseTemplate3" class="page-link " (click)="getUsers(index + 2)">{{index
+            + 2}}</a>
+          <ng-template #elseTemplate3>
+            <span class="page-link">
+              {{index + 2}}
+              <span class="sr-only">(current)</span>
+            </span>
+          </ng-template>
+        </li>
+        <li class="page-item disabled" *ngIf="pages >= 3"> 
+          <span class="page-link">
+            ..
+            <span class="sr-only">(current)</span>
+          </span>
+        </li>
+        <li class="page-item" *ngIf="pages >= 3" [ngClass]="{'active': pages === currentPage}">
+          <a *ngIf="pages !== currentPage; else elseTemplate5" class="page-link " (click)="getUsers(pages)">{{pages}}</a>
+          <ng-template #elseTemplate5>
+            <span class="page-link">
+              {{pages}}
+              <span class="sr-only">(current)</span>
+            </span>
+          </ng-template>
+        </li>
+        <li class="page-item" [ngClass]="{'disabled': currentPage === pages}">
+          <a class="page-link" (click)="getUsers(currentPage + 1)">Next</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>
+
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="alert alert-success" role="alert" *ngIf="editedAlert" style="text-align:center;">
+        Edytowano pomyślnie! <button type="button" class="btn btn-success" data-dismiss="modal">Ok</button>
+      </div>
+      <div class="modal-header">
+        <h5 class="modal-title" id="editModalLabel">Edytuj użytkownika</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form class="form-createDiet" #editForm="ngForm" novalidate (ngSubmit)="editUser(editForm)">
+        <div class="modal-body">
+          <div class="form-group row">
+            <label for="weight" class="col-md-4 col-form-label">Imię</label>
+            <div class="col-md-6">
+              <input type="text" class="form-control" id="firstName" name="firstName" ngModel>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="weight" class="col-md-4 col-form-label">Nazwisko</label>
+            <div class="col-md-6">
+              <input type="text" class="form-control" id="lastName" name="lastName" ngModel>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="weight" class="col-md-4 col-form-label">Login</label>
+            <div class="col-md-6">
+              <input type="text" class="form-control" id="userName" name="userName" ngModel>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="weight" class="col-md-4 col-form-label">E-mail</label>
+            <div class="col-md-6">
+              <input type="text" class="form-control" id="email" name="email" ngModel>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Zamknij</button>
+            <button type="submit" class="btn btn-success">Edytuj</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="createModal" tabindex="0" role="dialog" aria-labelledby="createModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="alert alert-success" role="alert" *ngIf="createAlert" style="text-align:center;">
+        Stworzono pomyślnie! <button type="button" class="btn btn-success" data-dismiss="modal" (click)="resetAddForm(f)">Ok</button>
+      </div>
+      <div class="modal-header">
+        <h5 class="modal-title" id="createModalLabel">Dodaj nowego użytkownika</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="resetAddForm(f)">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form class="form-createDiet" #f="ngForm" novalidate (ngSubmit)="createUser(f)">
+        <div class="modal-body">
+          <div class="form-group row">
+            <label for="weight" class="col-md-4 col-form-label">Imię</label>
+            <div class="col-md-6">
+              <input type="text" class="form-control" id="firstName" name="firstName" ngModel>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="weight" class="col-md-4 col-form-label">Nazwisko</label>
+            <div class="col-md-6">
+              <input type="text" class="form-control" id="lastName" name="lastName" ngModel>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="weight" class="col-md-4 col-form-label">E-mail</label>
+            <div class="col-md-6">
+              <input type="text" class="form-control" id="email" name="email" ngModel>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="weight" class="col-md-4 col-form-label">Hasło</label>
+            <div class="col-md-6">
+              <input type="text" class="form-control" id="password" name="password" ngModel>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="resetAddForm(f)">Zamknij</button>
+            <button type="submit" class="btn btn-success">Dodaj</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

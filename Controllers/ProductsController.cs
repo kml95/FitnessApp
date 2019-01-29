@@ -23,13 +23,45 @@ namespace FitnessApp.Controllers
         [HttpGet]
         [ProducesResponseType(200)]
         [ProducesResponseType(404)]
-        public async Task<ActionResult<IEnumerable<Product>>> Get()
+        public async Task<ActionResult<IEnumerable<ProductDTO>>> Get()
         {
-            List<Product> products = (List<Product>) await productRepository.GetAsync();
+            List<ProductDTO> products = (List<ProductDTO>) await productRepository.GetAsync();
 
             if (products == null) return NotFound();
 
             return products;
+        }
+
+        [HttpGet("[action]")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(404)]
+        public async Task<ActionResult<IEnumerable<ProductDTO>>> GetRange([FromQuery]int skip, [FromQuery]int take)
+        {
+            List<ProductDTO> products = (List<ProductDTO>)await productRepository.GetAsync(skip, take);
+
+            if (products == null) return NotFound();
+
+            return products;
+        }
+
+        [HttpGet("[action]")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(404)]
+        public async Task<ActionResult<int>> GetIdByName([FromQuery]string name)
+        {
+            var id = await productRepository.GetIdByNameAsync(name);
+
+            if (id == 0) return NotFound();
+
+            return id;
+        }
+
+
+        [HttpGet("[action]")]
+        [ProducesResponseType(200)]
+        public async Task<ActionResult<int>> Count()
+        {
+            return await productRepository.CountAsync();
         }
 
         [HttpPost("[action]")]

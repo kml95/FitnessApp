@@ -4,6 +4,7 @@ using FitnessApp.Data;
 using FitnessApp.Models.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace FitnessApp.DAL.Repositories
@@ -17,9 +18,52 @@ namespace FitnessApp.DAL.Repositories
             this.appDbContext = appContext;
         }
 
-        public async Task<IEnumerable<Exercise>> GetAsync()
+        public async Task<IEnumerable<ExerciseDTO>> GetAsync()
         {
-            return await appDbContext.Exercises.AsNoTracking().ToListAsync();
+            return await appDbContext
+                .Exercises
+                .AsNoTracking()
+                .Select(e => new ExerciseDTO
+                {
+                    Name = e.Name,
+                    Stage = e.Stage,
+                    Muscle = e.Muscle
+                })
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<ExerciseDTO>> GetAsync(int skip, int take)
+        {
+            return await appDbContext
+                .Exercises
+                .AsNoTracking()
+                .Skip(skip)
+                .Take(take)
+                .Select(e => new ExerciseDTO
+                {
+                    Name = e.Name,
+                    Stage = e.Stage,
+                    Muscle = e.Muscle
+                })
+                .ToListAsync();
+        }
+
+        public async Task<int> GetIdByNameAsync(string name)
+        {
+            return await appDbContext
+                .Exercises
+                .AsNoTracking()
+                .Where(e => e.Name.Equals(name))
+                .Select(e => e.Id)
+                .FirstOrDefaultAsync();
+        }
+
+        public async Task<int> CountAsync()
+        {
+            return await appDbContext
+                .Exercises
+                .AsNoTracking()
+                .CountAsync();
         }
 
         public async Task<Exercise> CreateAsync(ExerciseDTO exercise)
@@ -30,7 +74,7 @@ namespace FitnessApp.DAL.Repositories
                 Stage = exercise.Stage,
                 Muscle = exercise.Muscle
             };
-
+            
             appDbContext.Exercises.Add(newExercise);
             await appDbContext.SaveChangesAsync();
 

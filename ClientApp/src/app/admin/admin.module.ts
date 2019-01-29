@@ -10,6 +10,9 @@ import { AdminDetailsComponent } from './admin-details/admin-details.component';
 import { FormsModule } from '@angular/forms';
 import { AuthGuard } from '../auth.guard';
 import { AdminRoutingModule } from './admin-routing.module';
+import { ProductService } from '../shared/services/product.service';
+import { ExerciseService } from '../shared/services/exercise.service';
+import { AdminGuard } from '../admin.guard';
 
 @NgModule({
   imports: [
@@ -25,6 +28,10 @@ import { AdminRoutingModule } from './admin-routing.module';
     AdminHomeComponent,
     AdminDetailsComponent
   ],
-  providers: [AuthGuard]
+  providers: [
+    ProductService,
+    ExerciseService,
+    AdminGuard
+   ],
 })
 export class AdminModule { }

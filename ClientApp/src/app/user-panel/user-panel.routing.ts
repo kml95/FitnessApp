@@ -8,6 +8,7 @@ import { DietModule } from './diet/diet.module';
 import { TrainingModule } from './training/training.module';
 import { UserDetailsComponent } from './user-details/user-details.component';
 import { CalculatorsModule } from './calculators/calculators.module';
+import { AnalysisComponent } from './analysis/analysis.component';
 
 export const routing: ModuleWithProviders = RouterModule.forChild([
   {
@@ -20,6 +21,7 @@ export const routing: ModuleWithProviders = RouterModule.forChild([
      { path: 'dieta', loadChildren: () => DietModule},
      { path: 'trening', loadChildren: () => TrainingModule},
      { path: 'kalkulatory', loadChildren: () => CalculatorsModule},
-    ]
+     { path: 'suplementacja', loadChildren: () => CalculatorsModule},
+     { path: 'analiza', component: AnalysisComponent}    ]
   },
 ]);

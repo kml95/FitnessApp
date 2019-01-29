@@ -4,9 +4,8 @@ import { HomeComponent } from './home/home.component';
 import { FormsModule } from '@angular/forms';
 import { routing } from './user-panel.routing';
 import { AuthGuard } from '../auth.guard';
-import { CalculatorsModule } from './calculators/calculators.module';
-import { DietModule } from './diet/diet.module';
 import { UserDetailsComponent } from './user-details/user-details.component';
+import { AnalysisComponent } from './analysis/analysis.component';
 
 @NgModule({
   imports: [
@@ -16,7 +15,7 @@ import { UserDetailsComponent } from './user-details/user-details.component';
     // CalculatorsModule,
     // DietModule,
   ],
-  declarations: [HomeComponent, UserDetailsComponent],
+  declarations: [HomeComponent, UserDetailsComponent, AnalysisComponent],
   providers:    [AuthGuard]
 })
 export class UserPanelModule { }

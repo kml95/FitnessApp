@@ -4,49 +4,49 @@
       <div class="sidebar-sticky">
         <ul class="nav flex-column">
           <li class="nav-item">
-            <a class="nav-link active" routerLink="o-mnie">
+            <a class="nav-link" (click)="url = '/user-panel/o-mnie'" [ngClass]="{'isBold': url === '/user-panel/o-mnie'}" routerLink="o-mnie">
                 <i class="fas fa-user"></i>
               O mnie
             </a>
           </li><hr />
           <li class="nav-item">
-            <a class="nav-link" routerLink="dieta">
+            <a class="nav-link" (click)="url = '/user-panel/dieta'" [ngClass]="{'isBold': url === '/user-panel/dieta'}" routerLink="dieta">
                 <i class="fas fa-utensils"></i>
               Dieta
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="dieta/stworz">
+            <a class="nav-link" (click)="url = '/user-panel/dieta/stworz'" [ngClass]="{'isBold': url === '/user-panel/dieta/stworz'}" routerLink="dieta/stworz">
               <i class="fas fa-plus-circle"></i>
               Nowa dieta
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="dieta/stworz">
+            <a class="nav-link" (click)="url = '/user-panel/dieta/historia'" [ngClass]="{'isBold': url === '/user-panel/dieta/historia'}" routerLink="dieta/historia">
               <i class="fas fa-history"></i>
               Historia diet
             </a>
           </li><hr />
           <li class="nav-item">
-            <a class="nav-link" routerLink="trening">
+            <a class="nav-link" (click)="url = '/user-panel/trening'" [ngClass]="{'isBold': url === '/user-panel/trening'}" routerLink="trening">
                 <i class="fas fa-dumbbell"></i>
               Trening
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="trening/stworz">
+            <a class="nav-link" (click)="url = '/user-panel/trening/stworz'" [ngClass]="{'isBold': url === '/user-panel/trening/stworz'}" routerLink="trening/stworz">
               <i class="fas fa-plus-circle"></i>
               Nowy trening
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="trening">
+            <a class="nav-link" (click)="url = '/user-panel/trening/historia'" [ngClass]="{'isBold': url === '/user-panel/trening/historia'}" routerLink="trening/historia">
                 <i class="fas fa-history"></i>
               Historia treningów
             </a>
           </li><hr />
           <li class="nav-item">
-            <a class="nav-link" routerLink="kalkulatory">
+            <a class="nav-link" (click)="url = '/user-panel/kalkulatory'" [ngClass]="{'isBold': url === '/user-panel/kalkulatory'}" routerLink="kalkulatory">
                 <i class="fas fa-calculator"></i>
               Kalkulatory
             </a>
@@ -58,7 +58,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="analiza">
+            <a class="nav-link" (click)="url = '/user-panel/analiza'" [ngClass]="{'isBold': url === '/user-panel/analiza'}" routerLink="analiza">
                 <i class="far fa-chart-bar"></i>
               Analiza postępów
             </a>

@@ -4,6 +4,7 @@ using FitnessApp.Data;
 using FitnessApp.Models.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace FitnessApp.DAL.Repositories
@@ -17,9 +18,58 @@ namespace FitnessApp.DAL.Repositories
             this.appDbContext = appContext;
         }
 
-        public async Task<IEnumerable<Product>> GetAsync()
+        public async Task<IEnumerable<ProductDTO>> GetAsync()
         {
-            return await appDbContext.Products.AsNoTracking().ToListAsync();
+            return await appDbContext
+                .Products
+                .AsNoTracking()
+                .Select(p => new ProductDTO
+                {
+                    Name = p.Name,
+                    Calories = p.Calories,
+                    Carbohydrates = p.Carbohydrates,
+                    Protein = p.Protein,
+                    Fat = p.Fat,
+                    Category = p.Category
+                })
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<ProductDTO>> GetAsync(int skip, int take)
+        {
+            return await appDbContext
+                .Products
+                .AsNoTracking()
+                .Skip(skip)
+                .Take(take)
+                .Select(p => new ProductDTO
+                {
+                    Name = p.Name,
+                    Calories = p.Calories,
+                    Carbohydrates = p.Carbohydrates,
+                    Protein = p.Protein,
+                    Fat = p.Fat,
+                    Category = p.Category
+                })
+                .ToListAsync();
+        }
+
+        public async Task<int> GetIdByNameAsync(string name)
+        {
+            return await appDbContext
+                .Products
+                .AsNoTracking()
+                .Where(e => e.Name.Equals(name))
+                .Select(e => e.Id)
+                .FirstOrDefaultAsync();
+        }
+
+        public async Task<int> CountAsync()
+        {
+            return await appDbContext
+                .Products
+                .AsNoTracking()
+                .CountAsync();
         }
 
         public async Task<Product> CreateAsync(ProductDTO product)

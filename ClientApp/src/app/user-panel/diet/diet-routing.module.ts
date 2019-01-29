@@ -8,7 +8,8 @@ const routes: Routes = [
     path: '',
     component: UserDietComponent,
   },
-  { path: 'stworz', component: CreateDietComponent}
+  { path: 'stworz', component: CreateDietComponent},
+  { path: 'historia', component: CreateDietComponent}
 ];
 
 @NgModule({

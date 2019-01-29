@@ -49,6 +49,7 @@ namespace FitnessApp
             services.AddScoped<ITrainingRepository, TrainingRepository>();
             services.AddScoped<IExerciseRepository, ExerciseRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IAccountRepository, AccountRepository>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 

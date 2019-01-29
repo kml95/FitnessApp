@@ -1,3 +1,202 @@
-<p>
-  exercises works!
-</p>
+<div *ngIf="exercises">
+  <br />
+  <div class="container">
+    <div class="row">
+      <h3>Ćwiczenia</h3>
+      <button class="btn btn-success" (click)="createAlert = false;" type="button" data-toggle="modal" data-target="#createModal"><i
+          class="fas fa-plus"></i>
+        Dodaj</button>
+    </div>
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Nazwa</th>
+          <th scope="col">Etap</th>
+          <th scope="col">Partia mięśniowa</th>
+          <th scope="col">Akcje</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let exercise of exercises; let i = index">
+          <th scope="row">{{(currentPage - 1) * 7 + (i + 1)}}</th>
+          <td>{{exercise.name}}</td>
+          <td>{{exercise.stage}}</td>
+          <td>{{exercise.muscle}}</td>
+          <td>
+            <button class="btn btn-primary" (click)="initEditForm(editForm, exercise); editedAlert = false;"
+              data-toggle="modal" data-target="#editModal"><i class="far fa-edit"></i></button>
+            <button class="btn btn-danger" style="margin-left:1rem" (click)="deleteExercise(exercise.name)"><i class="fas fa-trash"></i></button>
+          </td>
+        </tr>
+      </tbody>
+    </table><br />
+
+    <nav aria-label="Pagination">
+      <ul class="pagination">
+        <li class="page-item" [ngClass]="{'disabled': currentPage === 1}">
+          <a class="page-link" (click)="getExercises(currentPage - 1)">Previous</a>
+        </li>
+        <li class="page-item" [ngClass]="{'active': index === currentPage}">
+          <a *ngIf="index !== currentPage; else elseTemplate" class="page-link " (click)="getExercises(index)">{{index}}</a>
+          <ng-template #elseTemplate>
+            <span class="page-link">
+              {{index}}
+              <span class="sr-only">(current)</span>
+            </span>
+          </ng-template>
+        </li>
+        <li class="page-item" [ngClass]="{'active': index + 1 === currentPage}">
+          <a *ngIf="index + 1 !== currentPage; else elseTemplate2" class="page-link " (click)="getExercises(index + 1)">{{index
+            + 1}}</a>
+          <ng-template #elseTemplate2>
+            <span class="page-link">
+              {{index + 1}}
+              <span class="sr-only">(current)</span>
+            </span>
+          </ng-template>
+        </li>
+        <li class="page-item" [ngClass]="{'active': index + 2 === currentPage}">
+          <a *ngIf="index + 2 !== currentPage; else elseTemplate3" class="page-link " (click)="getExercises(index + 2)">{{index
+            + 2}}</a>
+          <ng-template #elseTemplate3>
+            <span class="page-link">
+              {{index + 2}}
+              <span class="sr-only">(current)</span>
+            </span>
+          </ng-template>
+        </li>
+        <li class="page-item disabled">
+          <span class="page-link">
+            ..
+            <span class="sr-only">(current)</span>
+          </span>
+        </li>
+        <li class="page-item" [ngClass]="{'active': pages === currentPage}">
+          <a *ngIf="pages !== currentPage; else elseTemplate5" class="page-link " (click)="getExercises(pages)">{{pages}}</a>
+          <ng-template #elseTemplate5>
+            <span class="page-link">
+              {{pages}}
+              <span class="sr-only">(current)</span>
+            </span>
+          </ng-template>
+        </li>
+        <li class="page-item" [ngClass]="{'disabled': currentPage === pages}">
+          <a class="page-link" (click)="getExercises(currentPage + 1)">Next</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>
+
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="alert alert-success" role="alert" *ngIf="editedAlert" style="text-align:center;">
+        Edytowano pomyślnie! <button type="button" class="btn btn-success" data-dismiss="modal">Ok</button>
+      </div>
+      <div class="modal-header">
+        <h5 class="modal-title" id="editModalLabel">Edytuj ćwiczenie</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form class="form-createDiet" #editForm="ngForm" novalidate (ngSubmit)="editExercise(editForm)">
+        <div class="modal-body">
+          <div class="form-group row">
+            <label for="weight" class="col-md-4 col-form-label">Nazwa</label>
+            <div class="col-md-6">
+              <input type="text" class="form-control" id="name" name="name" ngModel>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="weight" class="col-md-4 col-form-label">Etap</label>
+            <div class="col-md-6">
+              <select class="form-control" name="stage" ngModel>
+                <option value="" selected disabled hidden>Wybierz tutaj</option>
+                <option value="1" selected>Ćwiczenie główne</option>
+                <option value="2">II ćwiczenie główne</option>
+                <option value="3">Cwiczenie rozluźniające</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="weight" class="col-md-4 col-form-label">Partia mięśniowa</label>
+            <div class="col-md-6">
+              <select class="form-control" name="muscle" ngModel>
+                <option value="" selected disabled hidden>Wybierz tutaj</option>
+                <option value="0">Klatka piersiowa</option>
+                <option value="1">Plecy</option>
+                <option value="2">Nogi</option>
+                <option value="3">Barki</option>
+                <option value="4">Biceps</option>
+                <option value="5">Triceps</option>
+                <option value="6">Mięsnie brzucha</option>
+              </select>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Zamknij</button>
+            <button type="submit" class="btn btn-success">Edytuj</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="createModal" tabindex="0" role="dialog" aria-labelledby="createModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="alert alert-success" role="alert" *ngIf="createAlert" style="text-align:center;">
+        Stworzono pomyślnie! <button type="button" class="btn btn-success" data-dismiss="modal" (click)="resetAddForm(f)">Ok</button>
+      </div>
+      <div class="modal-header">
+        <h5 class="modal-title" id="createModalLabel">Dodaj nowe ćwiczenie</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="resetAddForm(f)">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form class="form-createDiet" #f="ngForm" novalidate (ngSubmit)="createExercise(f)">
+        <div class="modal-body">
+          <div class="form-group row">
+            <label for="weight" class="col-md-4 col-form-label">Nazwa</label>
+            <div class="col-md-6">
+              <input type="text" class="form-control" id="name" name="name" ngModel>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="weight" class="col-md-4 col-form-label">Etap</label>
+            <div class="col-md-6">
+              <select class="form-control" name="stage" ngModel>
+                <option value="" selected disabled hidden>Wybierz tutaj</option>
+                <option value="1" selected>Ćwiczenie główne</option>
+                <option value="2">II ćwiczenie główne</option>
+                <option value="3">Cwiczenie rozluźniające</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="weight" class="col-md-4 col-form-label">Partia mięśniowa</label>
+            <div class="col-md-6">
+              <select class="form-control" name="muscle" ngModel>
+                <option value="" selected disabled hidden>Wybierz tutaj</option>
+                <option value="0">Klatka piersiowa</option>
+                <option value="1">Plecy</option>
+                <option value="2">Nogi</option>
+                <option value="3">Barki</option>
+                <option value="4">Biceps</option>
+                <option value="5">Triceps</option>
+                <option value="6">Mięsnie brzucha</option>
+              </select>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="resetAddForm(f)">Zamknij</button>
+            <button type="submit" class="btn btn-success">Dodaj</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

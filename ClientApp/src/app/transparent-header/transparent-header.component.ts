@@ -35,7 +35,6 @@ export class TransparentHeaderComponent implements OnInit, OnDestroy {
     });
     this.subscription = this.userService.authNavStatus$.subscribe(status => this.status = status);
     this.userService.adminNav$.subscribe(isAdmin => this.isAdmin = isAdmin);
-    console.log(this.isAdmin);
   }
 
 

@@ -23,13 +23,45 @@ namespace FitnessApp.Controllers
         [HttpGet]
         [ProducesResponseType(200)]
         [ProducesResponseType(404)]
-        public async Task<ActionResult<IEnumerable<Exercise>>> Get()
+        public async Task<ActionResult<IEnumerable<ExerciseDTO>>> Get()
         {
-            List<Exercise> exercises = (List<Exercise>) await exerciseRepository.GetAsync();
+            List<ExerciseDTO> exercises = (List<ExerciseDTO>) await exerciseRepository.GetAsync();
 
             if (exercises == null) return NotFound();
 
             return exercises;
+        }
+
+        [HttpGet("[action]")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(404)]
+        public async Task<ActionResult<IEnumerable<ExerciseDTO>>> GetRange([FromQuery]int skip, [FromQuery]int take)
+        {
+            List<ExerciseDTO> exercises = (List<ExerciseDTO>) await exerciseRepository.GetAsync(skip, take);
+
+            if (exercises == null) return NotFound();
+
+            return exercises;
+        }
+
+        [HttpGet("[action]")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(404)]
+        public async Task<ActionResult<int>> GetIdByName([FromQuery]string name)
+        {
+            var id = await exerciseRepository.GetIdByNameAsync(name);
+
+            if (id == 0) return NotFound();
+
+            return id;
+        }
+
+
+        [HttpGet("[action]")]
+        [ProducesResponseType(200)]
+        public async Task<ActionResult<int>> Count()
+        {
+            return await exerciseRepository.CountAsync();
         }
 
         [HttpPost("[action]")]
@@ -62,7 +94,7 @@ namespace FitnessApp.Controllers
         [HttpPut("[action]/{id}")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
-        public async Task<ActionResult> Update(int id, [FromBody] ExerciseDTO exercise)
+        public async Task<ActionResult> Update(int id, [FromBody]ExerciseDTO exercise)
         {
             bool ifUpdated = await exerciseRepository.UpdateAsync(id, exercise);
 

@@ -71,6 +71,10 @@ body {
   .sidebar .nav-link.active {
     color: #007bff;
   }
+
+  .sidebar .nav-link.isBold {
+    font-weight: bold;
+  }
   
   .sidebar .nav-link:hover .feather,
   .sidebar .nav-link.active .feather {
