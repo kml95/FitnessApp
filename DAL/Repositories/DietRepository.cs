@@ -37,6 +37,7 @@ namespace FitnessApp.DAL.Repositories
                     DietName = d.Name,
                     Calories = d.Calories,
                     MealsAmount = d.Meals,
+                    Created = d.Created.ToString("yyyy:MM:dd HH:mm"),
                     UserName = d.User.FirstName,
                     Meals = d.MealDiets
                     .Select(md => md.Meal)
@@ -83,6 +84,70 @@ namespace FitnessApp.DAL.Repositories
             return mealsProducts;
         }
 
+        public async Task<IEnumerable<MealsProductsDTO>> GetLastAsync(int count)
+        {
+            var mealsProducts = await appDbContext.Diets.AsNoTracking()
+                .Where(d => !d.DietCurrent && d.UserId.Equals(httpContextAccessor.HttpContext.User.FindFirst(Constants.Strings.JwtClaimIdentifiers.Id).Value))
+                .OrderByDescending(d => d.Created)
+                .Take(count)
+                .Select(d => new MealsProductsDTO
+                {
+                    DietName = d.Name,
+                    Calories = d.Calories,
+                    MealsAmount = d.Meals,
+                    Created = d.Created.ToString("yyyy:MM:dd HH:mm"),
+                    UserName = d.User.FirstName,
+                    Meals = d.MealDiets
+                    .Select(md => md.Meal)
+                    .Select(m => new MealsDTO
+                    {
+                        Name = m.Name,
+                        Type = m.Type.ToString(),
+                        Proportions = m.Proportions,
+                        Photo = m.Photo,
+                        ProductsNames = m.ProductMeals.Select(pm => pm.Product.Name).ToList()
+                    }).ToList()
+                })
+                .ToListAsync();
+
+            if (mealsProducts == null) return null;
+
+            var indexMealProducts = 0;
+            foreach (var item in mealsProducts)
+            {
+                var mealTypes = item.Meals.Select(m => m.Type).ToList();
+
+                var indexMealTypes = 0;
+                foreach (var item2 in mealTypes)
+                {
+                    switch (item2)
+                    {
+                        case "BREAKFAST":
+                            mealsProducts[indexMealProducts].Meals.ElementAt(indexMealTypes).Type = "Śniadanie";
+                            break;
+                        case "LUNCH":
+                            mealsProducts[indexMealProducts].Meals.ElementAt(indexMealTypes).Type = "II śniadanie";
+                            break;
+                        case "DINNER":
+                            mealsProducts[indexMealProducts].Meals.ElementAt(indexMealTypes).Type = "Obiad";
+                            break;
+                        case "SNACK":
+                            mealsProducts[indexMealProducts].Meals.ElementAt(indexMealTypes).Type = "Podwieczorek";
+                            break;
+                        case "SUPPER":
+                            mealsProducts[indexMealProducts].Meals.ElementAt(indexMealTypes).Type = "Kolacja";
+                            break;
+                        default:
+                            mealsProducts[indexMealProducts].Meals.ElementAt(indexMealTypes).Type = "Typ nieznany";
+                            break;
+                    }
+                    indexMealTypes++;
+                }
+                indexMealProducts++;
+            }
+            return mealsProducts;
+        }
+
         public async Task<IEnumerable<DietAnalysisDTO>> GetAllAsync()
         {
             return await appDbContext
@@ -92,7 +157,7 @@ namespace FitnessApp.DAL.Repositories
                .OrderBy(d => d.Created)
                .Select(d => new DietAnalysisDTO
                {
-                   Created = d.Created,
+                   Created = d.Created.ToString("yyyy:MM:dd HH:mm"),
                    Calories = d.Calories,
                    Meals = d.Meals
                })

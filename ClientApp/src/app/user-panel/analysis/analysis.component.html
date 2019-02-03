@@ -1,10 +1,21 @@
-<!-- <div *ngIf="chart">
+<!-- <div *ngIf="myChart">
   
-  <button class="btn btn-primary" (click)="trigger()">Rysuj</button>
-  <div><canvas id="myChart"></canvas></div>
 </div> -->
 
-
+<br />
+<div class="row">
+  <div class="col-md-2">
+    <h3>Wykres: </h3>
+  </div>
+  <div class="col-md-6">
+      <select class="form-control" [(ngModel)]="chart" (ngModelChange)="draw()">
+          <option value = "1" (click)="draw()">Ilość kalorii w diecie</option>
+          <option value = "2" (click)="draw()">Ilość posiłków w diecie</option>
+          <option value = "3" (click)="draw()">Ilość dni treningowych w tygodniu</option>
+        </select>
+  </div>
+</div>
+<br />
 <div>
-  <canvas id="myChart" width="400" height="400"></canvas>
+  <canvas id="myChart" width="1200" height="600"></canvas>
 </div>

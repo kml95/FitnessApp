@@ -9,9 +9,7 @@ import { ConfigService } from './shared/utils/config.service';
 import { TransparentHeaderComponent } from './transparent-header/transparent-header.component';
 import { HomeComponent } from './home/home.component';
 import { FormsModule } from '@angular/forms';
-import { UserPanelModule } from './user-panel/user-panel.module';
 import { UserService } from './shared/services/user.service';
-import { DietService } from './shared/services/diet.service';
 
 @NgModule({
   declarations: [
@@ -27,7 +25,7 @@ import { DietService } from './shared/services/diet.service';
     AccountModule,
     // UserPanelModule,
   ],
-  providers: [ConfigService, UserService, DietService],
+  providers: [ConfigService, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

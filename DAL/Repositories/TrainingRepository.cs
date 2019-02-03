@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using FitnessApp.DAL.DTO;
@@ -211,6 +212,7 @@ namespace FitnessApp.DAL.Repositories
                 {
                     Name = t.Name,
                     Days = t.Days,
+                    Created = t.Created.ToString("yyyy:MM:dd HH:mm"),
                     Aim = t.Aim,
                     UserName = t.User.FirstName,
                     Exercises = t.ExerciseTrainings
@@ -224,35 +226,49 @@ namespace FitnessApp.DAL.Repositories
                 })
                 .FirstOrDefaultAsync();
 
-            //var mealTypes = mealsProducts.Meals.Select(m => m.Type).ToList();
-
-            //var index = 0;
-            //foreach (var item in mealTypes)
-            //{
-            //    switch (item)
-            //    {
-            //        case "BREAKFAST":
-            //            mealsProducts.Meals.ElementAt(index).Type = "Śniadanie";
-            //            break;
-            //        case "LUNCH":
-            //            mealsProducts.Meals.ElementAt(index).Type = "II śniadanie";
-            //            break;
-            //        case "DINNER":
-            //            mealsProducts.Meals.ElementAt(index).Type = "Obiad";
-            //            break;
-            //        case "SNACK":
-            //            mealsProducts.Meals.ElementAt(index).Type = "Podwieczorek";
-            //            break;
-            //        case "SUPPER":
-            //            mealsProducts.Meals.ElementAt(index).Type = "Kolacja";
-            //            break;
-            //        default:
-            //            mealsProducts.Meals.ElementAt(index).Type = "Typ nieznany";
-            //            break;
-            //    }
-            //    index++;
-            //}
             return training;
+        }
+
+        public async Task<IEnumerable<TrainingDTO>> GetLastAsync(int count)
+        {
+            var trainings = await appDbContext.Trainings.AsNoTracking()
+                .Where(t => !t.TrainingCurrent && t.UserId.Equals(httpContextAccessor.HttpContext.User.FindFirst(Constants.Strings.JwtClaimIdentifiers.Id).Value))
+                .OrderByDescending(t => t.Created)
+                .Take(count)
+                .Select(t => new TrainingDTO
+                {
+                    Name = t.Name,
+                    Days = t.Days,
+                    Created = t.Created.ToString("yyyy:MM:dd HH:mm"),
+                    Aim = t.Aim,
+                    UserName = t.User.FirstName,
+                    Exercises = t.ExerciseTrainings
+                    .Select(et => et.Exercise)
+                    .Select(e => new TrainingDTO.ExerciseDTO
+                    {
+                        Name = e.Name,
+                        Stage = e.Stage,
+                        Muscle = e.Muscle,
+                    }).ToList()
+                })
+                .ToListAsync();
+
+            return trainings;
+        }
+
+        public async Task<IEnumerable<TrainingAnalysisDTO>> GetAllAsync()
+        {
+            return await appDbContext
+               .Trainings
+               .AsNoTracking()
+               .Where(t => t.UserId.Equals(httpContextAccessor.HttpContext.User.FindFirst(Constants.Strings.JwtClaimIdentifiers.Id).Value))
+               .OrderBy(t => t.Created)
+               .Select(t => new TrainingAnalysisDTO
+               {
+                   Created = t.Created.ToString("yyyy:MM:dd HH:mm"),
+                   Days = t.Days
+               })
+               .ToListAsync();
         }
     }
 }

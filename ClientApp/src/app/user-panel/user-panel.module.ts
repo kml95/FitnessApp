@@ -6,6 +6,8 @@ import { routing } from './user-panel.routing';
 import { AuthGuard } from '../auth.guard';
 import { UserDetailsComponent } from './user-details/user-details.component';
 import { AnalysisComponent } from './analysis/analysis.component';
+import { DietService } from '../shared/services/diet.service';
+import { TrainingService } from '../shared/services/training.service';
 
 @NgModule({
   imports: [
@@ -16,6 +18,6 @@ import { AnalysisComponent } from './analysis/analysis.component';
     // DietModule,
   ],
   declarations: [HomeComponent, UserDetailsComponent, AnalysisComponent],
-  providers:    [AuthGuard]
+  providers:    [AuthGuard, DietService, TrainingService]
 })
 export class UserPanelModule { }

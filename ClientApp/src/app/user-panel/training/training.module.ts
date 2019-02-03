@@ -6,6 +6,7 @@ import { UserTrainingComponent } from './user-training/user-training.component';
 import { CreateTrainingComponent } from './create-training/create-training.component';
 import { FormsModule } from '@angular/forms';
 import { TrainingService } from 'src/app/shared/services/training.service';
+import { HistoryTrainingComponent } from './history-training/history-training.component';
 
 @NgModule({
   imports: [
@@ -13,7 +14,7 @@ import { TrainingService } from 'src/app/shared/services/training.service';
     FormsModule,
     TrainingRoutingModule
   ],
-  declarations: [UserTrainingComponent, CreateTrainingComponent],
+  declarations: [UserTrainingComponent, CreateTrainingComponent, HistoryTrainingComponent],
   providers: [TrainingService],
 })
 export class TrainingModule { }

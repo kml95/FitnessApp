@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using FitnessApp.DAL.DTO;
 using FitnessApp.DAL.Repositories.Abstracts;
 using FitnessApp.ViewModels;
@@ -31,6 +32,30 @@ namespace FitnessApp.Controllers
             if (model == null) return NotFound();
 
             return model;
+        }
+
+        [HttpGet("[action]")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(404)]
+        public async Task<ActionResult<IEnumerable<TrainingDTO>>> GetLast([FromQuery]int count)
+        {
+            List<TrainingDTO> model = (List<TrainingDTO>) await trainingRepository.GetLastAsync(count);
+
+            if (model == null) return NotFound();
+
+            return model;
+        }
+
+        [HttpGet("[action]")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(404)]
+        public async Task<ActionResult<IEnumerable<TrainingAnalysisDTO>>> GetAll()
+        {
+            List<TrainingAnalysisDTO> trainings = (List<TrainingAnalysisDTO>) await trainingRepository.GetAllAsync();
+
+            if (trainings == null) return NotFound();
+
+            return trainings;
         }
 
         [HttpPost("[action]")]

@@ -1,0 +1,135 @@
+<div *ngIf="trainings === null">
+  <br />
+  <h2>Nie posiadasz aktualnie żadnych treningów. <a style="margin-left:1rem; margin-bottom: 0.5rem;" routerLink="stworz"
+      class="btn btn-primary">Stwórz trening już teraz!</a> </h2>
+</div>
+<div *ngIf="trainings" [hidden]="ifTraining">
+  <br />
+  <h3 style="text-align: center; font-style: italic">Historia twoich treningów</h3><br />
+  <div *ngFor="let item of trainings; let i=index" class="item-background">
+    <div class="border">
+      <div class="item row">
+        <div>
+          <p>{{item.created}} - {{item.name}}</p>
+        </div>
+        <div style="margin-left:auto">
+          <button class="btn btn-danger" (click)="showTraining(i)">Podgląd</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="model" [hidden]="!ifTraining" class="trainings">
+  <br />
+  <div *ngIf="model.days === 3">
+    <h2>Poniedziałek - klatka piersiowa, triceps, brzuch</h2>
+    <button class="btn btn-danger" (click)="ifTraining = !ifTraining">Wróć</button>
+    <hr />
+    <h4>Biceps</h4><br />
+    <div *ngFor="let exercise of model.chest">
+      <p>{{exercise}}</p>
+    </div><br />
+    <h4>Triceps</h4><br />
+    <div *ngFor="let exercise of model.triceps">
+      <p>{{exercise}}</p>
+    </div><br />
+    <h4>Brzuch</h4><br />
+    <div *ngFor="let exercise of model.abs">
+      <p>{{exercise}}</p>
+    </div><br /><br />
+    <h2>Środa - plecy, biceps</h2>
+    <hr />
+    <h4>Plecy</h4><br />
+    <div *ngFor="let exercise of model.back">
+      <p>{{exercise}}</p>
+    </div><br />
+    <h4>Biceps</h4><br />
+    <div *ngFor="let exercise of model.biceps">
+      <p>{{exercise}}</p>
+    </div><br /><br />
+    <h2>Piątek - nogi, barki</h2>
+    <hr />
+    <h4>Nogi</h4><br />
+    <div *ngFor="let exercise of model.legs">
+      <p>{{exercise}}</p>
+    </div><br />
+    <h4>Barki</h4><br />
+    <div *ngFor="let exercise of model.shoulders">
+      <p>{{exercise}}</p>
+    </div><br />
+  </div>
+
+  <div *ngIf="model.days === 4">
+    <h2>Poniedziałek - plecy, brzuch</h2>
+    <button class="btn btn-danger" (click)="ifTraining = !ifTraining">Wróć</button>
+    <hr />
+    <h4>Plecy</h4><br />
+    <div *ngFor="let exercise of model.back">
+      <p>{{exercise}}</p>
+    </div><br />
+    <h4>Brzuch</h4><br />
+    <div *ngFor="let exercise of model.abs">
+      <p>{{exercise}}</p>
+    </div><br /><br />
+    <h2>Wtorek - klatka piersiowa, triceps</h2>
+    <hr />
+    <h4>Klatka piersiowa</h4><br />
+    <div *ngFor="let exercise of model.chest">
+      <p>{{exercise}}</p>
+    </div><br />
+    <h4>Triceps</h4><br />
+    <div *ngFor="let exercise of model.triceps">
+      <p>{{exercise}}</p>
+    </div><br /><br />
+    <h2>Czwartek - Nogi</h2>
+    <hr />
+    <div *ngFor="let exercise of model.legs">
+      <p>{{exercise}}</p>
+    </div><br /><br />
+    <h2>Piątek - barki, biceps</h2>
+    <hr />
+    <h4>Barki</h4><br />
+    <div *ngFor="let exercise of model.shoulders">
+      <p>{{exercise}}</p>
+    </div><br />
+    <h4>Biceps</h4><br />
+    <div *ngFor="let exercise of model.biceps">
+      <p>{{exercise}}</p>
+    </div><br />
+  </div>
+
+  <div *ngIf="model.days === 5">
+    <h2>Poniedziałek - klatka piersiowa</h2>
+    <button class="btn btn-danger" (click)="ifTraining = !ifTraining">Wróć</button>
+    <hr />
+    <div *ngFor="let exercise of model.chest">
+      <p>{{exercise}}</p>
+    </div><br /><br />
+    <h2>Wtorek - plecy</h2>
+    <hr />
+    <div *ngFor="let exercise of model.back">
+      <p>{{exercise}}</p>
+    </div><br /><br />
+    <h2>Czwartek - biceps, tricpes</h2>
+    <hr />
+    <h4>Biceps</h4><br />
+    <div *ngFor="let exercise of model.biceps">
+      <p>{{exercise}}</p>
+    </div><br />
+    <h4>Triceps</h4><br />
+    <div *ngFor="let exercise of model.triceps">
+      <p>{{exercise}}</p>
+    </div><br /><br />
+    <h2>Piątek - barki</h2>
+    <hr />
+    <div *ngFor="let exercise of model.shoulders">
+      <p>{{exercise}}</p>
+    </div><br /><br />
+    <h2>Sobota - nogi</h2>
+    <hr />
+    <div *ngFor="let exercise of model.legs">
+      <p>{{exercise}}</p>
+    </div><br />
+  </div>
+</div>

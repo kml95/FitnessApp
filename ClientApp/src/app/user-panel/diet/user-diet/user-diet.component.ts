@@ -44,7 +44,7 @@ export class UserDietComponent implements OnInit {
           tmpProducts = [];
 
           const supperProportions = diet.meals[2].proportions.split(';').map(item => {
-            const tmp = (parseFloat(item) * 100) * (this.diet.calories / 2000) * (25 / 15);
+            const tmp = (parseFloat(item) * 100) * (diet.calories / 2000) * (25 / 15);
             return Math.round(tmp);
           });
 

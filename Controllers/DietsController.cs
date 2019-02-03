@@ -32,7 +32,19 @@ namespace FitnessApp.Controllers
             return model;
         }
 
-        [HttpGet]
+        [HttpGet("[action]")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(404)]
+        public async Task<ActionResult<IEnumerable<MealsProductsDTO>>> GetLast([FromQuery]int count)
+        {
+            List<MealsProductsDTO> diets = (List<MealsProductsDTO>) await dietRepository.GetLastAsync(count);
+
+            if (diets == null) return NotFound();
+
+            return diets;
+        }
+
+        [HttpGet("[action]")]
         [ProducesResponseType(200)]
         [ProducesResponseType(404)]
         public async Task<ActionResult<IEnumerable<DietAnalysisDTO>>> GetAll()

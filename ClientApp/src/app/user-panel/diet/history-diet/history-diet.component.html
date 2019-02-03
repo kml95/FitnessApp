@@ -1,0 +1,44 @@
+<div *ngIf="diet === null">
+  <br />
+  <h2>Nie posiadasz aktualnie żadnych diet. <a style="margin-left:1rem; margin-bottom: 0.5rem;" routerLink="stworz"
+      class="btn btn-primary">Stwórz dietę już teraz!</a> </h2>
+</div>
+<div *ngIf="diet" [hidden]="ifDiet">
+  <br />
+  <h3 style="text-align: center; font-style: italic">Historia twoich diet</h3><br />
+  <div *ngFor="let item of diet; let i=index" class="item-background">
+    <div class="border">
+      <div class="item row">
+        <div>
+          <p>{{item.created}} - {{item.dietName}}</p>
+        </div>
+        <div style="margin-left:auto">
+          <button class="btn btn-danger" (click)="showDiet(i)">Podgląd</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="model" [hidden]="!ifDiet">
+  <br />
+  <div class="meals row" *ngFor="let item of model; let i = index">
+    <div class="col-md-12">
+      <h2>{{item.type}}</h2>
+      <button class="btn btn-danger" *ngIf="i == 0" (click)="ifDiet = !ifDiet">Wróć</button>
+      <hr />
+      <div class="row">
+        <div class="col-md-6">
+          <h3>{{item.name}}:</h3>
+          <div *ngFor="let product of item.products">
+            <p>* {{product.name}} - {{produ}} {{product.value}}gram</p>
+          </div><br />
+        </div>
+        <div class="col-md-6" style="margin: auto">
+          <img class="displayed" width="200px" height="200px" src={{item.photo}} alt="Card image">
+        </div>
+      </div>
+      <br /><br />
+    </div>
+  </div>
+</div>

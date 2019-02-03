@@ -7,6 +7,7 @@ namespace FitnessApp.DAL.DTO
         public string DietName { get; set; }
         public int MealsAmount { get; set; }
         public int Calories { get; set; }
+        public string Created { get; set; }
         public string UserName { get; set; }
         public IEnumerable<MealsDTO> Meals { get; set; }
 

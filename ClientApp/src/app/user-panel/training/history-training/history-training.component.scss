@@ -1,0 +1,54 @@
+.border {
+    width: auto;
+    height: 100px;
+    border: 1px solid black;
+    margin-bottom: 1rem;
+    display: flex;
+}
+
+.item-background{
+    // background: rgba(0, 0, 0, 0.01);
+
+    .item {
+        margin: auto 0;
+        width: 100%;
+    
+        p{
+            color: black;
+            font-weight: bold;
+            padding-top: 5px;
+            padding-left: 3rem;
+        }
+    
+        button {
+            margin-left: auto;
+            margin-right: 3rem;
+        }
+    }
+}
+
+
+hr {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+.trainings
+    button  {
+        float: right;
+    }
+
+    h2 { 
+        display: inline;
+    }
+
+    h3 {
+    padding-bottom: 2%;
+}
+
+img.displayed {
+    display: block;
+    margin-left: auto;
+    margin-right: auto }

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CreateDietComponent } from './create-diet/create-diet.component';
 import { UserDietComponent } from './user-diet/user-diet.component';
+import { HistoryDietComponent } from './history-diet/history-diet.component';
 
 const routes: Routes = [
   {
@@ -9,7 +10,7 @@ const routes: Routes = [
     component: UserDietComponent,
   },
   { path: 'stworz', component: CreateDietComponent},
-  { path: 'historia', component: CreateDietComponent}
+  { path: 'historia', component: HistoryDietComponent}
 ];
 
 @NgModule({
