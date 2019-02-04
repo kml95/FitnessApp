@@ -62,6 +62,22 @@ namespace FitnessApp.DAL.Repositories
                 .FirstOrDefaultAsync();
         }
 
+        public async Task<AppUserDTO> GetByUserNameAsync(string userName)
+        {
+            return await userManager
+                .Users
+                .AsNoTracking()
+                .Where(u => u.UserName.Equals(userName))
+                .Select(e => new AppUserDTO
+                {
+                    FirstName = e.FirstName,
+                    LastName = e.LastName,
+                    Email = e.Email,
+                    UserName = e.UserName
+                })
+                .FirstOrDefaultAsync();
+        }
+
         public async Task<int> CountAsync()
         {
             return await userManager

@@ -1,0 +1,79 @@
+.border {
+    width: auto;
+    height: auto;
+    border: 1px solid black;
+    margin-bottom: 1rem;
+    display: flex;
+}
+
+h3 {
+    padding-bottom: 0%;
+    // margin-top: 1rem;
+}
+
+
+
+.item {
+        margin: auto 0;
+        width: 100%;
+
+        .col-md-2 {
+            padding-left: 0px;
+        }
+
+        .col-md-4 {
+            margin-top: 1rem;
+        }
+    
+        p{
+            color: black;
+            font-weight: 600;
+            padding-top: 5px;
+            padding-left: 3rem;
+            
+            span {
+                padding-left: 0.5rem;
+            }
+        }
+    
+        button {
+            margin-left: auto;
+            margin-right: 3rem;
+        }
+
+        .user-data {
+            p {
+                padding-left: 1rem;
+                
+                span {
+                    padding-left: 0.5rem;
+                }
+            }
+        }
+}
+
+
+hr {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+.trainings
+    button  {
+        float: right;
+    }
+
+    h2 { 
+        display: inline;
+    }
+
+    h3 {
+    padding-bottom: 2%;
+}
+
+img.displayed {
+    display: block;
+    margin-left: auto;
+    margin-right: auto }

@@ -61,6 +61,12 @@ export class UserService extends BaseService {
     return this.http.get<UserId>(`${this.baseUrl}/accounts/getIdByUserName?name=${userName}`, {headers});
   }
 
+  getByUserName(userName: string): Observable<User> {
+    const authToken = localStorage.getItem('auth_token');
+    const headers = new HttpHeaders().set('Authorization', 'Bearer ' + authToken);
+    return this.http.get<User>(`${this.baseUrl}/accounts/getByUserName?name=${userName}`, {headers});
+  }
+
   count(): Observable<number> {
     const authToken = localStorage.getItem('auth_token');
     const headers = new HttpHeaders().set('Authorization', 'Bearer ' + authToken);
@@ -88,6 +94,7 @@ export class UserService extends BaseService {
     return this.http.post<any>(this.baseUrl + '/auth/login', JSON.stringify({ userName, password }), this.httpOptions).pipe(
       map(res => {
         localStorage.setItem('auth_token', res.Auth_token);
+        localStorage.setItem('userName', userName);
         localStorage.setItem('role', res.Role);
         // localStorage.setItem('role', res.Role);
         if (res.Role === 'Admin') {

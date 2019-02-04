@@ -11,6 +11,7 @@ namespace FitnessApp.DAL.Repositories.Abstracts
         Task<IEnumerable<AppUserDTO>> GetAsync();
         Task<IEnumerable<AppUserDTO>> GetAsync(int skip, int take);
         Task<string> GetIdByUserNameAsync(string name);
+        Task<AppUserDTO> GetByUserNameAsync(string name);
         Task<int> CountAsync();
         Task<AppUser> CreateAsync(RegistrationViewModel model);
         Task<AppUserDTO> DeleteAsync(string id);

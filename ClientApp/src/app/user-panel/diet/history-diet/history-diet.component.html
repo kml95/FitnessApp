@@ -1,11 +1,11 @@
-<div *ngIf="diet === null">
+<div *ngIf="diet.length === 0">
   <br />
   <h2>Nie posiadasz aktualnie żadnych diet. <a style="margin-left:1rem; margin-bottom: 0.5rem;" routerLink="stworz"
       class="btn btn-primary">Stwórz dietę już teraz!</a> </h2>
 </div>
-<div *ngIf="diet" [hidden]="ifDiet">
+<div *ngIf="diet.length > 0" [hidden]="ifDiet">
   <br />
-  <h3 style="text-align: center; font-style: italic">Historia twoich diet</h3><br />
+  <h3 style="text-align: center;">Historia twoich diet</h3><br />
   <div *ngFor="let item of diet; let i=index" class="item-background">
     <div class="border">
       <div class="item row">

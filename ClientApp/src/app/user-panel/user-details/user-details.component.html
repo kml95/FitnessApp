@@ -1,3 +1,159 @@
-<p>
-  user-details works!
-</p>
+<div *ngIf="allData">
+  <br />
+  <h3 style="padding-bottom: 0%">Profile</h3>
+  <div class="border">
+    <div class="item row">
+      <div class="col-md-2">
+        <img class="displayed" width="200px" height="200px" src="/src/assets/avatar-default.png" alt="Card image">
+      </div>
+      <div class="col-md-4">
+        <p> Imię: <span>{{user.firstName}}</span> </p>
+        <p> Nazwisko: <span>{{user.lastName}}</span> </p>
+        <p> Login: <span>{{user.userName}}</span></p>
+        <p> Email: <span>{{user.email}}</span> </p>
+      </div>
+
+      <div style="margin-left:auto; margin-top: 1rem;">
+        <button class="btn" data-toggle="modal" data-target="#changePasswordModal">Zmien hasło</button>
+        <button class="btn" (click)="initEditForm(editForm, user); editedAlert = false;" data-toggle="modal" data-target="#editModal">Zmien dane konta</button>
+      </div>
+    </div>
+  </div>
+
+  <br />
+  <h3 style="padding-bottom: 0%">Twoja aktualna dieta</h3>
+  <div class="border">
+    <div class="item row">
+      <ng-container *ngIf="diet; else elseTemplate">
+        <div class="col-md-4 user-data">
+          <p>Cel diety: <span>{{diet.dietName}}</span></p>
+          <p>Data stworzenia: <span>{{diet.created}}</span></p>
+        </div>
+        <div class="col-md-4 user-data">
+          <p>Ilość kalorii: <span>{{diet.calories}}</span></p>
+          <p>Ilość posiłków: <span>{{diet.mealsAmount}}</span></p>
+        </div>
+        <div style="margin-left:auto; margin-top:2rem">
+          <button class="btn btn-primary" routerLink="/user-panel/dieta">Podgląd</button>
+        </div>
+      </ng-container>
+      <ng-template #elseTemplate>
+        <p style="margin-top: 1rem; margin-bottom: 1rem;">Nie posiadasz aktualnie żadnych diet. <a style="margin-left:42.5rem; margin-bottom: 0.5rem;"
+            routerLink="/user-panel/dieta/stworz" class="btn btn-primary">Stwórz dietę już teraz!</a> </p>
+      </ng-template>
+    </div>
+  </div>
+
+  <br />
+  <h3 style="padding-bottom: 0%">Twój aktualny trening</h3>
+  <div class="border">
+    <div class="item row">
+      <ng-container *ngIf="training; else elseTemplate2">
+        <div class="col-md-4 user-data">
+          <p>Cel treningu: <span>{{training.name}}</span></p>
+          <p>Data stworzenia: <span>{{training.created}}</span></p>
+        </div>
+        <div class="col-md-4 user-data">
+          <p>Ilość dni treningowych w tygodniu: <span>{{training.days}}</span></p>
+        </div>
+        <div style="margin-left:auto; margin-top:2rem">
+          <button class="btn btn-primary" routerLink="/user-panel/trening">Podgląd</button>
+        </div>
+      </ng-container>
+      <ng-template #elseTemplate2>
+        <p style="margin-top: 1rem; margin-bottom: 1rem;">Nie posiadasz aktualnie żadnych treningów. <a style="margin-left:38.5rem; margin-bottom: 0.5rem;"
+            routerLink="/user-panel/trening/stworz" class="btn btn-primary">Stwórz trening już teraz!</a> </p>
+      </ng-template>
+    </div>
+  </div>
+
+
+  <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="alert alert-success" role="alert" *ngIf="editedAlert" style="text-align:center;">
+          Edytowano pomyślnie! <button type="button" class="btn btn-success" data-dismiss="modal">Ok</button>
+        </div>
+        <div class="modal-header">
+          <h5 class="modal-title" id="editModalLabel">Edytuj użytkownika</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form class="form-createDiet" #editForm="ngForm" novalidate (ngSubmit)="editUser(editForm)">
+          <div class="modal-body">
+            <div class="form-group row">
+              <label for="weight" class="col-md-4 col-form-label">Imię</label>
+              <div class="col-md-6">
+                <input type="text" class="form-control" id="firstName" name="firstName" ngModel>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="weight" class="col-md-4 col-form-label">Nazwisko</label>
+              <div class="col-md-6">
+                <input type="text" class="form-control" id="lastName" name="lastName" ngModel>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="weight" class="col-md-4 col-form-label">Login</label>
+              <div class="col-md-6">
+                <input type="text" class="form-control" id="userName" name="userName" ngModel>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="weight" class="col-md-4 col-form-label">E-mail</label>
+              <div class="col-md-6">
+                <input type="text" class="form-control" id="email" name="email" ngModel>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Zamknij</button>
+              <button type="submit" class="btn btn-primary">Edytuj</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="changePasswordModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="alert alert-success" role="alert" *ngIf="editedAlert" style="text-align:center;">
+            Zmieniono pomyślnie! <button type="button" class="btn btn-success" data-dismiss="modal">Ok</button>
+          </div>
+          <div class="modal-header">
+            <h5 class="modal-title" id="editModalLabel">Zmień hasło</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form class="form-changePassword" #changePasswordForm="ngForm" novalidate (ngSubmit)="editUser(editForm)">
+            <div class="modal-body">
+              <div class="form-group row">
+                <label for="weight" class="col-md-4 col-form-label">Hasło</label>
+                <div class="col-md-6">
+                  <input type="text" class="form-control" id="password" name="password" ngModel>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="weight" class="col-md-4 col-form-label">Nowe hasło</label>
+                <div class="col-md-6">
+                  <input type="text" class="form-control" id="newPassword" name="newPassword" ngModel>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="weight" class="col-md-4 col-form-label">Powtórz hasło</label>
+                <div class="col-md-6">
+                  <input type="text" class="form-control" id="repeatPassword" name="repeatPassword" ngModel>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Zamknij</button>
+                <button type="submit" class="btn btn-primary">Zmień</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>

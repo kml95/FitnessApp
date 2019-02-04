@@ -17,7 +17,8 @@ export class HistoryDietComponent implements OnInit {
   ngOnInit() {
     this.dietService.getLast(5).subscribe(diet => {
       this.diet = diet;
-    }, (error) => this.diet = null);
+      console.log(this.diet.length);
+    });
   }
 
   showDiet(page: number) {

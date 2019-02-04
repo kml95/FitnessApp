@@ -372,36 +372,7 @@ export class UserTrainingComponent implements OnInit {
             break;
         }
       }
-
-      // for (let index = 0; index < tmpBack.length; index++) {
-      //   switch (index) {
-      //     case 0:
-      //       this.model.back[index] = `${index + 1}. ${this.model.back[index].toString()} - 4 serie 12/10/8/6`;
-      //       break;
-      //     case 1:
-      //       this.model.back[index] = `${index + 1}. ${this.model.back[index].toString()} - 3 serie 12/10/8`;
-      //       break;
-      //     case 2:
-      //       this.model.back[index] = `${index + 1}. ${this.model.back[index].toString()} - 3 serie 12/10/0`;
-      //       break;
-      //   }
-      // }
-      // for (let index = 0; index < tmpLegs.length; index++) {
-      //   this.model.legs[index] = `${index + 1}. ${this.model.legs[index].toString()}`;
-      // }
-      // for (let index = 0; index < tmpShoulders.length; index++) {
-      //   this.model.shoulders[index] = `${index + 1}. ${this.model.shoulders[index].toString()}`;
-      // }
-      // for (let index = 0; index < tmpBiceps.length; index++) {
-      //   this.model.biceps[index] = `${index + 1}. ${this.model.biceps[index].toString()}`;
-      // }
-      // for (let index = 0; index < tmpTriceps.length; index++) {
-      //   this.model.triceps[index] = `${index + 1}. ${this.model.triceps[index].toString()}`;
-      // }
-      // for (let index = 0; index < tmpAbs.length; index++) {
-      //   this.model.abs[index] = `${index + 1}. ${this.model.abs[index].toString()}`;
-      // }
-    });
+    }, (error) => this.training = null);
   }
 }
 

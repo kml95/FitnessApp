@@ -13,6 +13,9 @@ export class BMICalculatorComponent implements OnInit {
     height: number,
   };
 
+  result = false;
+  bmi: number;
+
   constructor() {
     this.model = { sex: null, weight: null, height: null };
    }
@@ -21,8 +24,8 @@ export class BMICalculatorComponent implements OnInit {
   }
 
   onSubmit() {
-    const bmi =  Math.round(this.model.weight / ((this.model.height / 100) * (this.model.height / 100)) * 10) / 10;
-    console.log(bmi);
+    this.bmi =  Math.round(this.model.weight / ((this.model.height / 100) * (this.model.height / 100)) * 10) / 10;
+    this.result = true;
   }
 
 }

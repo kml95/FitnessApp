@@ -1,11 +1,11 @@
-<div *ngIf="trainings === null">
+<div *ngIf="trainings.length === 0">
   <br />
   <h2>Nie posiadasz aktualnie żadnych treningów. <a style="margin-left:1rem; margin-bottom: 0.5rem;" routerLink="stworz"
       class="btn btn-primary">Stwórz trening już teraz!</a> </h2>
 </div>
-<div *ngIf="trainings" [hidden]="ifTraining">
+<div *ngIf="trainings.length > 0" [hidden]="ifTraining">
   <br />
-  <h3 style="text-align: center; font-style: italic">Historia twoich treningów</h3><br />
+  <h3 style="text-align: center;">Historia twoich treningów</h3><br />
   <div *ngFor="let item of trainings; let i=index" class="item-background">
     <div class="border">
       <div class="item row">

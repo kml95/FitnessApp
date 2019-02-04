@@ -57,6 +57,19 @@ namespace FitnessApp.Controllers
             return Ok(new { Id = id });
         }
 
+        [AllowAnonymous]
+        [HttpGet("[action]")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(404)]
+        public async Task<ActionResult<AppUserDTO>> GetByUserName([FromQuery]string name)
+        {
+            AppUserDTO user = await accountRepository.GetByUserNameAsync(name);
+
+            if (user == null) return NotFound();
+
+            return user;
+        }
+
         [HttpGet("[action]")]
         [ProducesResponseType(200)]
         public async Task<ActionResult<int>> Count()

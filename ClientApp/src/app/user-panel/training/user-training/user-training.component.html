@@ -1,3 +1,8 @@
+<div *ngIf="training === null">
+  <br />
+  <h2>Nie posiadasz aktualnie żadnych treningów. <a style="margin-left:1rem; margin-bottom: 0.5rem;" routerLink="stworz"
+      class="btn btn-primary">Stwórz trening już teraz!</a> </h2>
+</div>
 <div *ngIf="training">
   <!-- <h1>Cześć, {{training.userName}}. Twoim celem jest {{training.aim}}</h1><br /> -->
   <br />
