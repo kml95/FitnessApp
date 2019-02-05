@@ -1,94 +1,53 @@
-<div class="row">
-  <div class="col-md-4">
-    <h3>BMI - wskaźnik masy ciała</h3>
-    <p>Tutaj tekst(opis)</p>
-  </div>
-  <div class="col-md-6">
-    <form (ngSubmit)="onSubmit()" #bfForm="ngForm">
-      <div class="form-group row">
-        <label for="sex" class="col-md-2 col-form-label">Płeć</label>
-        <div class="btn-group btn-group-toggle col-md-4" data-toggle="radio">
-          <label class="btn btn-secondary active">
-            <input type="radio" name="male" id="man" value="male" [(ngModel)]="model.sex" autocomplete="off" checked #male = "ngModel"> Mężczyzna
-          </label>
-          <label class="btn btn-secondary">
-            <input type="radio" name="female" id="woman" value="female" [(ngModel)]="model.sex" autocomplete="off" #female = "ngModel"> Kobieta
-          </label>
+<div class="diet-center">
+    <div class="row">
+      <div class="col-md-4">
+        <h3>Poziom tkanki tłuszczowej</h3><br />
+        <p>Dzięki temu kalkulatorowi obliczysz swój poziom tkanki tłusczowej.
+        </p><br />
+        <div class="card img-fluid">
+          <img class="card-img-top" src="/assets/bodyfat2.jpeg" alt="Card image">
         </div>
       </div>
-
-      <!-- <label>Chicken or the Egg?</label>
-      <div class="form-group">
-          <div class="btn-group btn-group-toggle col-md-4" data-toggle="rad">
-              <label>
-                  <input type="radio" name="chickenEgg" value="chicken" [(ngModel)]="model.sex">
-                  Chicken
-              </label>
-          
-          
-              <label>
-                  <input type="radio" name="chickenEgg" value="egg" [(ngModel)]="model.sex">
-                  Egg
-              </label>
-            </div>
-      </div> -->
+      <div class="col-md-8" style="display:flex">
+        <form class="form-createDiet diet" #bmrForm="ngForm" (ngSubmit)="onSubmit()">
+          <h1 class="h3 mb-3 font-weight-normal">Wprowadź swoje dane</h1><br />
   
-
-      <div class="form-group row">
-        <label for="weight" class="col-md-2 col-form-label">Waga</label>
-        <div class="col-md-4">
-          <input type="text" class="form-control" id="weight" [(ngModel)]="model.weight" name="weight">
-        </div>
+          <label style="margin-right : 1rem">Płeć</label>
+  
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="male" id="male" value="male" [(ngModel)]="model.sex" checked>
+            <label class="form-check-label" for="male">Mężczyzna</label>
+          </div>
+          <div class="form-check form-check-inline margin-bottom">
+            <input class="form-check-input" type="radio" name="female" id="female" value="female" [(ngModel)]="model.sex">
+            <label class="form-check-label" for="female">Kobieta</label>
+          </div>
+  
+          <label for="inputWeight" class="sr-only">Waga</label>
+          <input type="number" class="form-control" id="weight" #weight="ngModel" placeholder="Waga" name="weight" required="" autofocus=""
+            [(ngModel)]="model.weight"><br />
+          <div *ngIf="weight.invalid && (weight.dirty && weight.touched)" class="alert alert-danger">
+            <div *ngIf="weight.errors.required">
+              Waga jest wymagana
+            </div>
+          </div>
+          <label for="inputWaist" class="sr-only">Obwód pasa</label>
+          <input type="number" class="form-control" id="inputWaist" #waist="ngModel" placeholder="Obwód pasa" name="waist"
+            required="" [(ngModel)]="model.waist"><br />
+          <div *ngIf="waist.invalid && (waist.dirty && waist.touched)" class="alert alert-danger">
+            <div *ngIf="waist.errors.required">
+              Obwód pasa jest wymagany
+            </div>
+          </div>
+  
+          <div class="row">
+            <button class="btn btn-primary" type="submit" [disabled]="!bmrForm.form.valid">Policz</button>
+            <button class="btn btn-primary" style="margin-left: 2%" routerLink="/user-panel/kalkulatory">Cofnij</button>
+          </div>
+          <div *ngIf="result" class="result">
+            <p>Twój poziom tkanki tłuszczowej to: <span>{{bodyfat}}%   +/- 3%</span></p>
+          </div>
+        </form>
       </div>
- 
-      <div class="form-group row">
-        <label for="height" class="col-md-2 col-form-label">Obwód pasa</label>
-        <div class="col-md-4">
-          <input type="text" class="form-control" id="height" [(ngModel)]="model.waist" name="height">
-        </div>
-      </div>
-
-      
-      <button type="submit" class="btn btn-success" [disabled]="!bfForm.form.valid">Policz</button>
-    </form>
+    </div>
   </div>
-</div>
-
-<!-- <div class="row">
-  <div class="col-md-6">
-    <form #f="ngForm" novalidate (ngSubmit)="registerUser(f)">
-      <div class="form-group">
-        <label for="first-name">First name</label>
-        <input type="text" class="form-control" id="first-name" placeholder="First name" name="firstName" tmFocus
-          ngModel>
-      </div>
-      <div class="form-group">
-        <label for="last-name">Last name</label>
-        <input type="text" class="form-control" id="last-name" placeholder="Last name" name="lastName" ngModel>
-      </div>
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input id="email" type="text" required name="email" validateEmail class="form-control" placeholder="Email"
-          ngModel #email="ngModel">
-        <small [hidden]="email.valid || (email.pristine && !submitted)" class="text-danger">Please enter a valid email</small>
-      </div>
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" class="form-control" id="password" name="password" placeholder="Password" ngModel>
-      </div>
-      <div class="form-group">
-        <label for="location">Location</label>
-        <input type="text" class="form-control" id="location" placeholder="Location" required name="location" ngModel>
-      </div>
-
-      <div class="form-group">
-        <button type="submit" class="btn btn-primary" [disabled]="f.invalid || isRequesting">Sign Up</button>
-      </div>
-
-      <div *ngIf="errors" class="alert alert-danger" role="alert">
-        <strong>Oops!</strong> {{errors}}
-      </div>
-
-    </form>
-  </div>
-</div> -->

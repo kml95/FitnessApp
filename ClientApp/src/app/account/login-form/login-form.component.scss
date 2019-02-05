@@ -6,10 +6,21 @@
 }
 
 .background-image {
-    background-image: url('/assets/login.png');
+    background-image: url('/assets/login.jpeg');
     background-position: center;
     background-repeat: no-repeat;
 }
+
+// .background-image:after {
+//     content: '';
+//     position: absolute;
+//     top: 0;
+//     bottom: 0;
+//     left: 0;
+//     right: 0;
+//     display: block;
+//     background-color: rgba(0, 0, 0, 0.5);
+//   }
 
 .form-signin {
     &.checkbox {
