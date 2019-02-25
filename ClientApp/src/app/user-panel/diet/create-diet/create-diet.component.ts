@@ -53,7 +53,7 @@ export class CreateDietComponent implements OnInit {
     this.dietService.create(this.dietName, calories, this.model.mealsAmount)
     .subscribe(() => {
       console.log('Udało się pomyślnie stworzyć');
-      this.router.navigate(['/user-panel/dieta']);
+      this.router.navigate(['/panel-uzytkownika/dieta']);
     });
   }
 }

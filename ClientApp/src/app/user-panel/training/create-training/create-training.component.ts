@@ -42,7 +42,7 @@ export class CreateTrainingComponent implements OnInit {
     this.trainingService.create(this.model.name, this.model.days, this.model.trainingAim)
       .subscribe(() => {
         console.log('Udało się pomyślnie stworzyć');
-        this.router.navigate(['/user-panel/trening']);
+        this.router.navigate(['/panel-uzytkownika/trening']);
       });
   }
 

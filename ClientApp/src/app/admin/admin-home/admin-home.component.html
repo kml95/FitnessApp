@@ -4,72 +4,52 @@
       <div class="sidebar-sticky">
         <ul class="nav flex-column">
           <li class="nav-item">
-            <a class="nav-link" (click)="url = '/admin/o-mnie'" [ngClass]="{'isBold': url === '/admin/o-mnie'}" routerLink="o-mnie">
+            <a class="nav-link" (click)="url = '/admin/o-mnie'" [ngClass]="{'isBold': url === '/admin/o-mnie'}"
+              routerLink="o-mnie">
               <i class="fas fa-user"></i>
               O mnie
             </a>
           </li>
           <hr />
           <li class="nav-item">
-            <a class="nav-link" (click)="url = '/admin/uzytkownicy'" [ngClass]="{'isBold': url === '/admin/uzytkownicy'}" routerLink="uzytkownicy">
+            <a class="nav-link" (click)="url = '/admin/uzytkownicy'" [ngClass]="{'isBold': url === '/admin/uzytkownicy'}"
+              routerLink="uzytkownicy">
               <i class="fas fa-users-cog"></i>
               Użytkownicy
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" (click)="url = '/admin/produkty'" [ngClass]="{'isBold': url === '/admin/produkty'}" routerLink="produkty">
-              <i class="fas fa-utensils"></i>
+            <a class="nav-link" (click)="url = '/admin/produkty'" [ngClass]="{'isBold': url === '/admin/produkty'}"
+              routerLink="produkty">
+              <i class="fas fa-drumstick-bite"></i>
               Produkty
             </a>
           </li>
-          <!-- <li class="nav-item">
-              <a class="nav-link" routerLink="posilki">
-                <i class="fas fa-history"></i>
-                Posiłki
-              </a>
-            </li> -->
           <li class="nav-item">
-            <a class="nav-link" (click)="url = '/admin/cwiczenia'" [ngClass]="{'isBold': url === '/admin/cwiczenia'}" routerLink="cwiczenia">
+            <a class="nav-link" (click)="url = '/admin/posilki'" [ngClass]="{'isBold': url === '/admin/posilki'}" routerLink="produkty">
+              <i class="fas fa-utensils"></i>
+              Posiłki
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" (click)="url = '/admin/diety'" [ngClass]="{'isBold': url === '/admin/diety'}"
+              routerLink="produkty">
+              <i class="fas fa-balance-scale"></i>
+              Diety
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" (click)="url = '/admin/cwiczenia'" [ngClass]="{'isBold': url === '/admin/cwiczenia'}"
+              routerLink="cwiczenia">
               <i class="fas fa-dumbbell"></i>
               Ćwiczenia
             </a>
           </li>
-        </ul>
-
-        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-          <span>Saved reports</span>
-          <a class="d-flex align-items-center text-muted" href="#">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-              stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus-circle">
-              <circle cx="12" cy="12" r="10"></circle>
-              <line x1="12" y1="8" x2="12" y2="16"></line>
-              <line x1="8" y1="12" x2="16" y2="12"></line>
-            </svg>
-          </a>
-        </h6>
-        <ul class="nav flex-column mb-2">
           <li class="nav-item">
-            <a class="nav-link" href="#">
-              <i class="far fa-file-alt"></i>
-              Current month
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <i class="far fa-file-alt"></i>
-              Last quarter
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <i class="far fa-file-alt"></i>
-              Social engagement
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <i class="far fa-file-alt"></i>
-              Year-end sale
+            <a class="nav-link" (click)="url = '/admin/treningi'" [ngClass]="{'isBold': url === '/admin/treningi'}"
+              routerLink="cwiczenia">
+              <i class="fas fa-scroll"></i>
+              Treningi
             </a>
           </li>
         </ul>

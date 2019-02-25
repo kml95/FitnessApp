@@ -1,6 +1,6 @@
 <div *ngIf="allData">
   <br />
-  <h3 style="padding-bottom: 0%">Profile</h3>
+  <h3 style="padding-bottom: 0%">Profil</h3>
   <div class="border">
     <div class="item row">
       <div class="col-md-2">
@@ -34,12 +34,12 @@
           <p>Ilość posiłków: <span>{{diet.mealsAmount}}</span></p>
         </div>
         <div style="margin-left:auto; margin-top:2rem">
-          <button class="btn btn-primary" routerLink="/user-panel/dieta">Podgląd</button>
+          <button class="btn btn-primary" routerLink="/panel-uzytkownika/dieta">Podgląd</button>
         </div>
       </ng-container>
       <ng-template #elseTemplate>
         <p style="margin-top: 1rem; margin-bottom: 1rem;">Nie posiadasz aktualnie żadnych diet. <a style="margin-left:42.5rem; margin-bottom: 0.5rem;"
-            routerLink="/user-panel/dieta/stworz" class="btn btn-primary">Stwórz dietę już teraz!</a> </p>
+            routerLink="/panel-uzytkownika/dieta/stworz" class="btn btn-primary">Stwórz dietę już teraz!</a> </p>
       </ng-template>
     </div>
   </div>
@@ -57,12 +57,12 @@
           <p>Ilość dni treningowych w tygodniu: <span>{{training.days}}</span></p>
         </div>
         <div style="margin-left:auto; margin-top:2rem">
-          <button class="btn btn-primary" routerLink="/user-panel/trening">Podgląd</button>
+          <button class="btn btn-primary" routerLink="/panel-uzytkownika/trening">Podgląd</button>
         </div>
       </ng-container>
       <ng-template #elseTemplate2>
         <p style="margin-top: 1rem; margin-bottom: 1rem;">Nie posiadasz aktualnie żadnych treningów. <a style="margin-left:38.5rem; margin-bottom: 0.5rem;"
-            routerLink="/user-panel/trening/stworz" class="btn btn-primary">Stwórz trening już teraz!</a> </p>
+            routerLink="/panel-uzytkownika/trening/stworz" class="btn btn-primary">Stwórz trening już teraz!</a> </p>
       </ng-template>
     </div>
   </div>

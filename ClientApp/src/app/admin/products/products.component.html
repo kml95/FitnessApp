@@ -41,7 +41,7 @@
     <nav aria-label="Pagination">
       <ul class="pagination">
         <li class="page-item" [ngClass]="{'disabled': currentPage === 1}">
-          <a class="page-link" (click)="getProducts(currentPage - 1)">Previous</a>
+          <a class="page-link" (click)="getProducts(currentPage - 1)">Poprzednia</a>
         </li>
         <li class="page-item" [ngClass]="{'active': index === currentPage}">
           <a *ngIf="index !== currentPage; else elseTemplate" class="page-link " (click)="getProducts(index)">{{index}}</a>
@@ -88,7 +88,7 @@
           </ng-template>
         </li>
         <li class="page-item" [ngClass]="{'disabled': currentPage === pages}">
-          <a class="page-link" (click)="getProducts(currentPage + 1)">Next</a>
+          <a class="page-link" (click)="getProducts(currentPage + 1)">Następna</a>
         </li>
       </ul>
     </nav>

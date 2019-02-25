@@ -15,7 +15,7 @@ export class AdminGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
 
     if (!this.user.isAdminLoggedIn() || !this.user.isLoggedIn()) {
-      this.router.navigate(['/login']);
+      this.router.navigate(['/logowanie']);
       return false;
     }
 

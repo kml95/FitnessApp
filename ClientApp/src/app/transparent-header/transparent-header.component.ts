@@ -16,7 +16,7 @@ export class TransparentHeaderComponent implements OnInit, OnDestroy {
   subscription: Subscription;
   route: string;
 
-  login = '/login'; register = '/register';
+  login = '/logowanie'; register = '/rejestracja';
 
 
   constructor(private userService: UserService, private location: Location, private router: Router) { }

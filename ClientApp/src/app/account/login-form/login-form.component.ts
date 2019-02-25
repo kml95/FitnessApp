@@ -52,7 +52,7 @@ export class LoginFormComponent implements OnInit, OnDestroy {
             if (this.userService.isAdminLoggedIn()) {
               this.router.navigate(['/admin']);
             } else {
-              this.router.navigate(['/user-panel']);
+              this.router.navigate(['/panel-uzytkownika']);
             }
           }
         },
